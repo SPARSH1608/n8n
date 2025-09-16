@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../dist/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id String @id @default(uuid())
+  email String @unique
+  password String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+workflows Workflow[]
+  credentials Credential[]
+}
+
+
+model Credential{
+  id String @id @default(uuid())
+  user User @relation(fields:[userId],references: [id], onDelete: Cascade)
+  userId String
+  name String
+  type String
+  data Json
+    createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Workflow {
+  id String @id @default(uuid())
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  userId String
+  name String
+  isActive Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  nodes WorkflowNode[]
+  nodeLinks WorkflowNodeLink[]
+  triggerConfig      TriggerConfiguration?
+  executionHistories ExecutionHistory[]
+}
+
+model WorkflowNode{
+  id String @id @default(uuid())
+  workflow Workflow @relation(fields: [workflowId],references: [id],onDelete: Cascade)
+  workflowId String 
+  type String
+  parameters Json
+  positionX Int?
+  positionY Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  outgoingLinks WorkflowNodeLink[] @relation("OutgoingLinks")
+  incomingLinks WorkflowNodeLink[] @relation("IncomingLinks")
+  triggerConfiguration TriggerConfiguration?
+}
+
+model WorkflowNodeLink{
+  id String @id @default(uuid())
+  workflow  Workflow  @relation(fields: [workflowId],references: [id],onDelete: Cascade)
+  workflowId String
+  
+  fromNode WorkflowNode @relation("OutgoingLinks",fields: [fromNodeId],references: [id],onDelete: Cascade)
+  fromNodeId String
+  
+  toNode WorkflowNode @relation("IncomingLinks",fields: [toNodeId],references: [id],onDelete: Cascade)
+  toNodeId String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model TriggerConfiguration{
+  
+  id String @id @default(uuid())
+  workflow Workflow? @relation(fields: [workflowId],references: [id],onDelete: Cascade)
+  workflowId String? @unique
+  WorkflowNode WorkflowNode? @relation(fields: [nodeId],references: [id],onDelete: Cascade)
+  nodeId String? @unique
+  type String
+  config Json
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model ExecutionHistory{
+  id String @id @default(uuid())
+  workflow Workflow @relation(fields: [workflowId],references: [id],onDelete: Cascade)
+  workflowId String
+  status String
+  startedAt DateTime @default(now())
+  finishedAt DateTime?
+  log Json
+}

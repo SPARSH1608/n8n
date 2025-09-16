@@ -1,0 +1,4 @@
+@import "tailwindcss";
+.dashboard-page {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1.000) 0.000%, rgba(0, 0, 0, 1.000) 50.000%, rgb(39, 0, 0) 100.000%);
+}
