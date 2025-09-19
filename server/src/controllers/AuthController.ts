@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 dotenv.config()
 import prisma from '../db/prisma.js'
 const SECRET='secret'
-const resend=new Resend('re_eHdjiaLb_8U1tuY4Afepx8xbQnRm77Q8P')
+// const resend=new Resend('re_eHdjiaLb_8U1tuY4Afepx8xbQnRm77Q8P')
 const SALT_ROUND=10
 import generator from 'generate-password'
 function sendMail(email: string, link: string) {
