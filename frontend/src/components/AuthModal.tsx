@@ -1,6 +1,6 @@
-import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const AuthModal = ({
@@ -26,18 +26,18 @@ const AuthModal = ({
         await signup(email);
         alert('Magic link sent! Check your email.');
       } else {
-     const res = await login(email, password);
-     console.log('Login response:', res,typeof(res));
-     console.log('test', res?.email, res?.token);
-  
-     if (res?.email && res?.token) {
-      console.log('Navigating to dashboard');
-       navigate('/dashboard');
-       onClose()
-}
-      
-    }
+        const res = await login(email, password);
+        console.log('Login response:', res, typeof (res));
+        console.log('test', res?.email, res?.token);
+
+        if (res?.email && res?.token) {
+          console.log('Navigating to dashboard');
+          navigate('/dashboard');
+          onClose()
+        }
+      }
     } catch {
+      console.log('Error during authentication');
       setError('Something went wrong');
     }
   };

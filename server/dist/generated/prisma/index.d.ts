@@ -39,15 +39,15 @@ export type WorkflowNode = $Result.DefaultSelection<Prisma.$WorkflowNodePayload>
  */
 export type WorkflowNodeLink = $Result.DefaultSelection<Prisma.$WorkflowNodeLinkPayload>
 /**
- * Model TriggerConfiguration
- * 
- */
-export type TriggerConfiguration = $Result.DefaultSelection<Prisma.$TriggerConfigurationPayload>
-/**
  * Model ExecutionHistory
  * 
  */
 export type ExecutionHistory = $Result.DefaultSelection<Prisma.$ExecutionHistoryPayload>
+/**
+ * Model NodeExecutionHistory
+ * 
+ */
+export type NodeExecutionHistory = $Result.DefaultSelection<Prisma.$NodeExecutionHistoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -218,16 +218,6 @@ export class PrismaClient<
   get workflowNodeLink(): Prisma.WorkflowNodeLinkDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.triggerConfiguration`: Exposes CRUD operations for the **TriggerConfiguration** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TriggerConfigurations
-    * const triggerConfigurations = await prisma.triggerConfiguration.findMany()
-    * ```
-    */
-  get triggerConfiguration(): Prisma.TriggerConfigurationDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.executionHistory`: Exposes CRUD operations for the **ExecutionHistory** model.
     * Example usage:
     * ```ts
@@ -236,6 +226,16 @@ export class PrismaClient<
     * ```
     */
   get executionHistory(): Prisma.ExecutionHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nodeExecutionHistory`: Exposes CRUD operations for the **NodeExecutionHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NodeExecutionHistories
+    * const nodeExecutionHistories = await prisma.nodeExecutionHistory.findMany()
+    * ```
+    */
+  get nodeExecutionHistory(): Prisma.NodeExecutionHistoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -681,8 +681,8 @@ export namespace Prisma {
     Workflow: 'Workflow',
     WorkflowNode: 'WorkflowNode',
     WorkflowNodeLink: 'WorkflowNodeLink',
-    TriggerConfiguration: 'TriggerConfiguration',
-    ExecutionHistory: 'ExecutionHistory'
+    ExecutionHistory: 'ExecutionHistory',
+    NodeExecutionHistory: 'NodeExecutionHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -701,7 +701,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "credential" | "workflow" | "workflowNode" | "workflowNodeLink" | "triggerConfiguration" | "executionHistory"
+      modelProps: "user" | "credential" | "workflow" | "workflowNode" | "workflowNodeLink" | "executionHistory" | "nodeExecutionHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1075,80 +1075,6 @@ export namespace Prisma {
           }
         }
       }
-      TriggerConfiguration: {
-        payload: Prisma.$TriggerConfigurationPayload<ExtArgs>
-        fields: Prisma.TriggerConfigurationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TriggerConfigurationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TriggerConfigurationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          findFirst: {
-            args: Prisma.TriggerConfigurationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TriggerConfigurationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          findMany: {
-            args: Prisma.TriggerConfigurationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>[]
-          }
-          create: {
-            args: Prisma.TriggerConfigurationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          createMany: {
-            args: Prisma.TriggerConfigurationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TriggerConfigurationCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>[]
-          }
-          delete: {
-            args: Prisma.TriggerConfigurationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          update: {
-            args: Prisma.TriggerConfigurationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          deleteMany: {
-            args: Prisma.TriggerConfigurationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TriggerConfigurationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TriggerConfigurationUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>[]
-          }
-          upsert: {
-            args: Prisma.TriggerConfigurationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TriggerConfigurationPayload>
-          }
-          aggregate: {
-            args: Prisma.TriggerConfigurationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTriggerConfiguration>
-          }
-          groupBy: {
-            args: Prisma.TriggerConfigurationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TriggerConfigurationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TriggerConfigurationCountArgs<ExtArgs>
-            result: $Utils.Optional<TriggerConfigurationCountAggregateOutputType> | number
-          }
-        }
-      }
       ExecutionHistory: {
         payload: Prisma.$ExecutionHistoryPayload<ExtArgs>
         fields: Prisma.ExecutionHistoryFieldRefs
@@ -1220,6 +1146,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ExecutionHistoryCountArgs<ExtArgs>
             result: $Utils.Optional<ExecutionHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      NodeExecutionHistory: {
+        payload: Prisma.$NodeExecutionHistoryPayload<ExtArgs>
+        fields: Prisma.NodeExecutionHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NodeExecutionHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NodeExecutionHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.NodeExecutionHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NodeExecutionHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.NodeExecutionHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.NodeExecutionHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.NodeExecutionHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NodeExecutionHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.NodeExecutionHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          update: {
+            args: Prisma.NodeExecutionHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.NodeExecutionHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NodeExecutionHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NodeExecutionHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.NodeExecutionHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeExecutionHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.NodeExecutionHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNodeExecutionHistory>
+          }
+          groupBy: {
+            args: Prisma.NodeExecutionHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NodeExecutionHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NodeExecutionHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<NodeExecutionHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1324,8 +1324,8 @@ export namespace Prisma {
     workflow?: WorkflowOmit
     workflowNode?: WorkflowNodeOmit
     workflowNodeLink?: WorkflowNodeLinkOmit
-    triggerConfiguration?: TriggerConfigurationOmit
     executionHistory?: ExecutionHistoryOmit
+    nodeExecutionHistory?: NodeExecutionHistoryOmit
   }
 
   /* Types for Logging */
@@ -1527,6 +1527,37 @@ export namespace Prisma {
    */
   export type WorkflowNodeCountOutputTypeCountIncomingLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkflowNodeLinkWhereInput
+  }
+
+
+  /**
+   * Count Type ExecutionHistoryCountOutputType
+   */
+
+  export type ExecutionHistoryCountOutputType = {
+    nodeExecutionHistories: number
+  }
+
+  export type ExecutionHistoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nodeExecutionHistories?: boolean | ExecutionHistoryCountOutputTypeCountNodeExecutionHistoriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExecutionHistoryCountOutputType without action
+   */
+  export type ExecutionHistoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExecutionHistoryCountOutputType
+     */
+    select?: ExecutionHistoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExecutionHistoryCountOutputType without action
+   */
+  export type ExecutionHistoryCountOutputTypeCountNodeExecutionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NodeExecutionHistoryWhereInput
   }
 
 
@@ -3729,6 +3760,7 @@ export namespace Prisma {
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    trigger: string | null
   }
 
   export type WorkflowMaxAggregateOutputType = {
@@ -3738,6 +3770,7 @@ export namespace Prisma {
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    trigger: string | null
   }
 
   export type WorkflowCountAggregateOutputType = {
@@ -3747,6 +3780,7 @@ export namespace Prisma {
     isActive: number
     createdAt: number
     updatedAt: number
+    trigger: number
     _all: number
   }
 
@@ -3758,6 +3792,7 @@ export namespace Prisma {
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    trigger?: true
   }
 
   export type WorkflowMaxAggregateInputType = {
@@ -3767,6 +3802,7 @@ export namespace Prisma {
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    trigger?: true
   }
 
   export type WorkflowCountAggregateInputType = {
@@ -3776,6 +3812,7 @@ export namespace Prisma {
     isActive?: true
     createdAt?: true
     updatedAt?: true
+    trigger?: true
     _all?: true
   }
 
@@ -3858,6 +3895,7 @@ export namespace Prisma {
     isActive: boolean
     createdAt: Date
     updatedAt: Date
+    trigger: string
     _count: WorkflowCountAggregateOutputType | null
     _min: WorkflowMinAggregateOutputType | null
     _max: WorkflowMaxAggregateOutputType | null
@@ -3884,10 +3922,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    trigger?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     nodes?: boolean | Workflow$nodesArgs<ExtArgs>
     nodeLinks?: boolean | Workflow$nodeLinksArgs<ExtArgs>
-    triggerConfig?: boolean | Workflow$triggerConfigArgs<ExtArgs>
     executionHistories?: boolean | Workflow$executionHistoriesArgs<ExtArgs>
     _count?: boolean | WorkflowCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflow"]>
@@ -3899,6 +3937,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    trigger?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflow"]>
 
@@ -3909,6 +3948,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    trigger?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflow"]>
 
@@ -3919,14 +3959,14 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    trigger?: boolean
   }
 
-  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["workflow"]>
+  export type WorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "isActive" | "createdAt" | "updatedAt" | "trigger", ExtArgs["result"]["workflow"]>
   export type WorkflowInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     nodes?: boolean | Workflow$nodesArgs<ExtArgs>
     nodeLinks?: boolean | Workflow$nodeLinksArgs<ExtArgs>
-    triggerConfig?: boolean | Workflow$triggerConfigArgs<ExtArgs>
     executionHistories?: boolean | Workflow$executionHistoriesArgs<ExtArgs>
     _count?: boolean | WorkflowCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3943,7 +3983,6 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       nodes: Prisma.$WorkflowNodePayload<ExtArgs>[]
       nodeLinks: Prisma.$WorkflowNodeLinkPayload<ExtArgs>[]
-      triggerConfig: Prisma.$TriggerConfigurationPayload<ExtArgs> | null
       executionHistories: Prisma.$ExecutionHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3953,6 +3992,7 @@ export namespace Prisma {
       isActive: boolean
       createdAt: Date
       updatedAt: Date
+      trigger: string
     }, ExtArgs["result"]["workflow"]>
     composites: {}
   }
@@ -4350,7 +4390,6 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     nodes<T extends Workflow$nodesArgs<ExtArgs> = {}>(args?: Subset<T, Workflow$nodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     nodeLinks<T extends Workflow$nodeLinksArgs<ExtArgs> = {}>(args?: Subset<T, Workflow$nodeLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowNodeLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    triggerConfig<T extends Workflow$triggerConfigArgs<ExtArgs> = {}>(args?: Subset<T, Workflow$triggerConfigArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     executionHistories<T extends Workflow$executionHistoriesArgs<ExtArgs> = {}>(args?: Subset<T, Workflow$executionHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExecutionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4387,6 +4426,7 @@ export namespace Prisma {
     readonly isActive: FieldRef<"Workflow", 'Boolean'>
     readonly createdAt: FieldRef<"Workflow", 'DateTime'>
     readonly updatedAt: FieldRef<"Workflow", 'DateTime'>
+    readonly trigger: FieldRef<"Workflow", 'String'>
   }
     
 
@@ -4831,25 +4871,6 @@ export namespace Prisma {
   }
 
   /**
-   * Workflow.triggerConfig
-   */
-  export type Workflow$triggerConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    where?: TriggerConfigurationWhereInput
-  }
-
-  /**
    * Workflow.executionHistories
    */
   export type Workflow$executionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4922,6 +4943,8 @@ export namespace Prisma {
     positionY: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    credentialId: string | null
+    trigger: string | null
   }
 
   export type WorkflowNodeMaxAggregateOutputType = {
@@ -4932,6 +4955,8 @@ export namespace Prisma {
     positionY: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    credentialId: string | null
+    trigger: string | null
   }
 
   export type WorkflowNodeCountAggregateOutputType = {
@@ -4943,6 +4968,8 @@ export namespace Prisma {
     positionY: number
     createdAt: number
     updatedAt: number
+    credentialId: number
+    trigger: number
     _all: number
   }
 
@@ -4965,6 +4992,8 @@ export namespace Prisma {
     positionY?: true
     createdAt?: true
     updatedAt?: true
+    credentialId?: true
+    trigger?: true
   }
 
   export type WorkflowNodeMaxAggregateInputType = {
@@ -4975,6 +5004,8 @@ export namespace Prisma {
     positionY?: true
     createdAt?: true
     updatedAt?: true
+    credentialId?: true
+    trigger?: true
   }
 
   export type WorkflowNodeCountAggregateInputType = {
@@ -4986,6 +5017,8 @@ export namespace Prisma {
     positionY?: true
     createdAt?: true
     updatedAt?: true
+    credentialId?: true
+    trigger?: true
     _all?: true
   }
 
@@ -5084,6 +5117,8 @@ export namespace Prisma {
     positionY: number | null
     createdAt: Date
     updatedAt: Date
+    credentialId: string | null
+    trigger: string
     _count: WorkflowNodeCountAggregateOutputType | null
     _avg: WorkflowNodeAvgAggregateOutputType | null
     _sum: WorkflowNodeSumAggregateOutputType | null
@@ -5114,10 +5149,11 @@ export namespace Prisma {
     positionY?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    credentialId?: boolean
+    trigger?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
     outgoingLinks?: boolean | WorkflowNode$outgoingLinksArgs<ExtArgs>
     incomingLinks?: boolean | WorkflowNode$incomingLinksArgs<ExtArgs>
-    triggerConfiguration?: boolean | WorkflowNode$triggerConfigurationArgs<ExtArgs>
     _count?: boolean | WorkflowNodeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflowNode"]>
 
@@ -5130,6 +5166,8 @@ export namespace Prisma {
     positionY?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    credentialId?: boolean
+    trigger?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflowNode"]>
 
@@ -5142,6 +5180,8 @@ export namespace Prisma {
     positionY?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    credentialId?: boolean
+    trigger?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workflowNode"]>
 
@@ -5154,14 +5194,15 @@ export namespace Prisma {
     positionY?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    credentialId?: boolean
+    trigger?: boolean
   }
 
-  export type WorkflowNodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "type" | "parameters" | "positionX" | "positionY" | "createdAt" | "updatedAt", ExtArgs["result"]["workflowNode"]>
+  export type WorkflowNodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "type" | "parameters" | "positionX" | "positionY" | "createdAt" | "updatedAt" | "credentialId" | "trigger", ExtArgs["result"]["workflowNode"]>
   export type WorkflowNodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
     outgoingLinks?: boolean | WorkflowNode$outgoingLinksArgs<ExtArgs>
     incomingLinks?: boolean | WorkflowNode$incomingLinksArgs<ExtArgs>
-    triggerConfiguration?: boolean | WorkflowNode$triggerConfigurationArgs<ExtArgs>
     _count?: boolean | WorkflowNodeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkflowNodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5177,7 +5218,6 @@ export namespace Prisma {
       workflow: Prisma.$WorkflowPayload<ExtArgs>
       outgoingLinks: Prisma.$WorkflowNodeLinkPayload<ExtArgs>[]
       incomingLinks: Prisma.$WorkflowNodeLinkPayload<ExtArgs>[]
-      triggerConfiguration: Prisma.$TriggerConfigurationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5188,6 +5228,8 @@ export namespace Prisma {
       positionY: number | null
       createdAt: Date
       updatedAt: Date
+      credentialId: string | null
+      trigger: string
     }, ExtArgs["result"]["workflowNode"]>
     composites: {}
   }
@@ -5585,7 +5627,6 @@ export namespace Prisma {
     workflow<T extends WorkflowDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowDefaultArgs<ExtArgs>>): Prisma__WorkflowClient<$Result.GetResult<Prisma.$WorkflowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     outgoingLinks<T extends WorkflowNode$outgoingLinksArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowNode$outgoingLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowNodeLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incomingLinks<T extends WorkflowNode$incomingLinksArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowNode$incomingLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowNodeLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    triggerConfiguration<T extends WorkflowNode$triggerConfigurationArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowNode$triggerConfigurationArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5623,6 +5664,8 @@ export namespace Prisma {
     readonly positionY: FieldRef<"WorkflowNode", 'Int'>
     readonly createdAt: FieldRef<"WorkflowNode", 'DateTime'>
     readonly updatedAt: FieldRef<"WorkflowNode", 'DateTime'>
+    readonly credentialId: FieldRef<"WorkflowNode", 'String'>
+    readonly trigger: FieldRef<"WorkflowNode", 'String'>
   }
     
 
@@ -6064,25 +6107,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkflowNodeLinkScalarFieldEnum | WorkflowNodeLinkScalarFieldEnum[]
-  }
-
-  /**
-   * WorkflowNode.triggerConfiguration
-   */
-  export type WorkflowNode$triggerConfigurationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    where?: TriggerConfigurationWhereInput
   }
 
   /**
@@ -7192,1132 +7216,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TriggerConfiguration
-   */
-
-  export type AggregateTriggerConfiguration = {
-    _count: TriggerConfigurationCountAggregateOutputType | null
-    _min: TriggerConfigurationMinAggregateOutputType | null
-    _max: TriggerConfigurationMaxAggregateOutputType | null
-  }
-
-  export type TriggerConfigurationMinAggregateOutputType = {
-    id: string | null
-    workflowId: string | null
-    nodeId: string | null
-    type: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TriggerConfigurationMaxAggregateOutputType = {
-    id: string | null
-    workflowId: string | null
-    nodeId: string | null
-    type: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TriggerConfigurationCountAggregateOutputType = {
-    id: number
-    workflowId: number
-    nodeId: number
-    type: number
-    config: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type TriggerConfigurationMinAggregateInputType = {
-    id?: true
-    workflowId?: true
-    nodeId?: true
-    type?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TriggerConfigurationMaxAggregateInputType = {
-    id?: true
-    workflowId?: true
-    nodeId?: true
-    type?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TriggerConfigurationCountAggregateInputType = {
-    id?: true
-    workflowId?: true
-    nodeId?: true
-    type?: true
-    config?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type TriggerConfigurationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TriggerConfiguration to aggregate.
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TriggerConfigurations to fetch.
-     */
-    orderBy?: TriggerConfigurationOrderByWithRelationInput | TriggerConfigurationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TriggerConfigurationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TriggerConfigurations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TriggerConfigurations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TriggerConfigurations
-    **/
-    _count?: true | TriggerConfigurationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TriggerConfigurationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TriggerConfigurationMaxAggregateInputType
-  }
-
-  export type GetTriggerConfigurationAggregateType<T extends TriggerConfigurationAggregateArgs> = {
-        [P in keyof T & keyof AggregateTriggerConfiguration]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTriggerConfiguration[P]>
-      : GetScalarType<T[P], AggregateTriggerConfiguration[P]>
-  }
-
-
-
-
-  export type TriggerConfigurationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TriggerConfigurationWhereInput
-    orderBy?: TriggerConfigurationOrderByWithAggregationInput | TriggerConfigurationOrderByWithAggregationInput[]
-    by: TriggerConfigurationScalarFieldEnum[] | TriggerConfigurationScalarFieldEnum
-    having?: TriggerConfigurationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TriggerConfigurationCountAggregateInputType | true
-    _min?: TriggerConfigurationMinAggregateInputType
-    _max?: TriggerConfigurationMaxAggregateInputType
-  }
-
-  export type TriggerConfigurationGroupByOutputType = {
-    id: string
-    workflowId: string | null
-    nodeId: string | null
-    type: string
-    config: JsonValue
-    createdAt: Date
-    updatedAt: Date
-    _count: TriggerConfigurationCountAggregateOutputType | null
-    _min: TriggerConfigurationMinAggregateOutputType | null
-    _max: TriggerConfigurationMaxAggregateOutputType | null
-  }
-
-  type GetTriggerConfigurationGroupByPayload<T extends TriggerConfigurationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TriggerConfigurationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TriggerConfigurationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TriggerConfigurationGroupByOutputType[P]>
-            : GetScalarType<T[P], TriggerConfigurationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TriggerConfigurationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    workflowId?: boolean
-    nodeId?: boolean
-    type?: boolean
-    config?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }, ExtArgs["result"]["triggerConfiguration"]>
-
-  export type TriggerConfigurationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    workflowId?: boolean
-    nodeId?: boolean
-    type?: boolean
-    config?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }, ExtArgs["result"]["triggerConfiguration"]>
-
-  export type TriggerConfigurationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    workflowId?: boolean
-    nodeId?: boolean
-    type?: boolean
-    config?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }, ExtArgs["result"]["triggerConfiguration"]>
-
-  export type TriggerConfigurationSelectScalar = {
-    id?: boolean
-    workflowId?: boolean
-    nodeId?: boolean
-    type?: boolean
-    config?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type TriggerConfigurationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "nodeId" | "type" | "config" | "createdAt" | "updatedAt", ExtArgs["result"]["triggerConfiguration"]>
-  export type TriggerConfigurationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }
-  export type TriggerConfigurationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }
-  export type TriggerConfigurationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workflow?: boolean | TriggerConfiguration$workflowArgs<ExtArgs>
-    WorkflowNode?: boolean | TriggerConfiguration$WorkflowNodeArgs<ExtArgs>
-  }
-
-  export type $TriggerConfigurationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TriggerConfiguration"
-    objects: {
-      workflow: Prisma.$WorkflowPayload<ExtArgs> | null
-      WorkflowNode: Prisma.$WorkflowNodePayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      workflowId: string | null
-      nodeId: string | null
-      type: string
-      config: Prisma.JsonValue
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["triggerConfiguration"]>
-    composites: {}
-  }
-
-  type TriggerConfigurationGetPayload<S extends boolean | null | undefined | TriggerConfigurationDefaultArgs> = $Result.GetResult<Prisma.$TriggerConfigurationPayload, S>
-
-  type TriggerConfigurationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TriggerConfigurationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TriggerConfigurationCountAggregateInputType | true
-    }
-
-  export interface TriggerConfigurationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TriggerConfiguration'], meta: { name: 'TriggerConfiguration' } }
-    /**
-     * Find zero or one TriggerConfiguration that matches the filter.
-     * @param {TriggerConfigurationFindUniqueArgs} args - Arguments to find a TriggerConfiguration
-     * @example
-     * // Get one TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TriggerConfigurationFindUniqueArgs>(args: SelectSubset<T, TriggerConfigurationFindUniqueArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TriggerConfiguration that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TriggerConfigurationFindUniqueOrThrowArgs} args - Arguments to find a TriggerConfiguration
-     * @example
-     * // Get one TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TriggerConfigurationFindUniqueOrThrowArgs>(args: SelectSubset<T, TriggerConfigurationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TriggerConfiguration that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationFindFirstArgs} args - Arguments to find a TriggerConfiguration
-     * @example
-     * // Get one TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TriggerConfigurationFindFirstArgs>(args?: SelectSubset<T, TriggerConfigurationFindFirstArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TriggerConfiguration that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationFindFirstOrThrowArgs} args - Arguments to find a TriggerConfiguration
-     * @example
-     * // Get one TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TriggerConfigurationFindFirstOrThrowArgs>(args?: SelectSubset<T, TriggerConfigurationFindFirstOrThrowArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TriggerConfigurations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TriggerConfigurations
-     * const triggerConfigurations = await prisma.triggerConfiguration.findMany()
-     * 
-     * // Get first 10 TriggerConfigurations
-     * const triggerConfigurations = await prisma.triggerConfiguration.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const triggerConfigurationWithIdOnly = await prisma.triggerConfiguration.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TriggerConfigurationFindManyArgs>(args?: SelectSubset<T, TriggerConfigurationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TriggerConfiguration.
-     * @param {TriggerConfigurationCreateArgs} args - Arguments to create a TriggerConfiguration.
-     * @example
-     * // Create one TriggerConfiguration
-     * const TriggerConfiguration = await prisma.triggerConfiguration.create({
-     *   data: {
-     *     // ... data to create a TriggerConfiguration
-     *   }
-     * })
-     * 
-     */
-    create<T extends TriggerConfigurationCreateArgs>(args: SelectSubset<T, TriggerConfigurationCreateArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TriggerConfigurations.
-     * @param {TriggerConfigurationCreateManyArgs} args - Arguments to create many TriggerConfigurations.
-     * @example
-     * // Create many TriggerConfigurations
-     * const triggerConfiguration = await prisma.triggerConfiguration.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TriggerConfigurationCreateManyArgs>(args?: SelectSubset<T, TriggerConfigurationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TriggerConfigurations and returns the data saved in the database.
-     * @param {TriggerConfigurationCreateManyAndReturnArgs} args - Arguments to create many TriggerConfigurations.
-     * @example
-     * // Create many TriggerConfigurations
-     * const triggerConfiguration = await prisma.triggerConfiguration.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TriggerConfigurations and only return the `id`
-     * const triggerConfigurationWithIdOnly = await prisma.triggerConfiguration.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TriggerConfigurationCreateManyAndReturnArgs>(args?: SelectSubset<T, TriggerConfigurationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TriggerConfiguration.
-     * @param {TriggerConfigurationDeleteArgs} args - Arguments to delete one TriggerConfiguration.
-     * @example
-     * // Delete one TriggerConfiguration
-     * const TriggerConfiguration = await prisma.triggerConfiguration.delete({
-     *   where: {
-     *     // ... filter to delete one TriggerConfiguration
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TriggerConfigurationDeleteArgs>(args: SelectSubset<T, TriggerConfigurationDeleteArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TriggerConfiguration.
-     * @param {TriggerConfigurationUpdateArgs} args - Arguments to update one TriggerConfiguration.
-     * @example
-     * // Update one TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TriggerConfigurationUpdateArgs>(args: SelectSubset<T, TriggerConfigurationUpdateArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TriggerConfigurations.
-     * @param {TriggerConfigurationDeleteManyArgs} args - Arguments to filter TriggerConfigurations to delete.
-     * @example
-     * // Delete a few TriggerConfigurations
-     * const { count } = await prisma.triggerConfiguration.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TriggerConfigurationDeleteManyArgs>(args?: SelectSubset<T, TriggerConfigurationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TriggerConfigurations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TriggerConfigurations
-     * const triggerConfiguration = await prisma.triggerConfiguration.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TriggerConfigurationUpdateManyArgs>(args: SelectSubset<T, TriggerConfigurationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TriggerConfigurations and returns the data updated in the database.
-     * @param {TriggerConfigurationUpdateManyAndReturnArgs} args - Arguments to update many TriggerConfigurations.
-     * @example
-     * // Update many TriggerConfigurations
-     * const triggerConfiguration = await prisma.triggerConfiguration.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TriggerConfigurations and only return the `id`
-     * const triggerConfigurationWithIdOnly = await prisma.triggerConfiguration.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TriggerConfigurationUpdateManyAndReturnArgs>(args: SelectSubset<T, TriggerConfigurationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TriggerConfiguration.
-     * @param {TriggerConfigurationUpsertArgs} args - Arguments to update or create a TriggerConfiguration.
-     * @example
-     * // Update or create a TriggerConfiguration
-     * const triggerConfiguration = await prisma.triggerConfiguration.upsert({
-     *   create: {
-     *     // ... data to create a TriggerConfiguration
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TriggerConfiguration we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TriggerConfigurationUpsertArgs>(args: SelectSubset<T, TriggerConfigurationUpsertArgs<ExtArgs>>): Prisma__TriggerConfigurationClient<$Result.GetResult<Prisma.$TriggerConfigurationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TriggerConfigurations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationCountArgs} args - Arguments to filter TriggerConfigurations to count.
-     * @example
-     * // Count the number of TriggerConfigurations
-     * const count = await prisma.triggerConfiguration.count({
-     *   where: {
-     *     // ... the filter for the TriggerConfigurations we want to count
-     *   }
-     * })
-    **/
-    count<T extends TriggerConfigurationCountArgs>(
-      args?: Subset<T, TriggerConfigurationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TriggerConfigurationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TriggerConfiguration.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TriggerConfigurationAggregateArgs>(args: Subset<T, TriggerConfigurationAggregateArgs>): Prisma.PrismaPromise<GetTriggerConfigurationAggregateType<T>>
-
-    /**
-     * Group by TriggerConfiguration.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TriggerConfigurationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TriggerConfigurationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TriggerConfigurationGroupByArgs['orderBy'] }
-        : { orderBy?: TriggerConfigurationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TriggerConfigurationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTriggerConfigurationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TriggerConfiguration model
-   */
-  readonly fields: TriggerConfigurationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TriggerConfiguration.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TriggerConfigurationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    workflow<T extends TriggerConfiguration$workflowArgs<ExtArgs> = {}>(args?: Subset<T, TriggerConfiguration$workflowArgs<ExtArgs>>): Prisma__WorkflowClient<$Result.GetResult<Prisma.$WorkflowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    WorkflowNode<T extends TriggerConfiguration$WorkflowNodeArgs<ExtArgs> = {}>(args?: Subset<T, TriggerConfiguration$WorkflowNodeArgs<ExtArgs>>): Prisma__WorkflowNodeClient<$Result.GetResult<Prisma.$WorkflowNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TriggerConfiguration model
-   */
-  interface TriggerConfigurationFieldRefs {
-    readonly id: FieldRef<"TriggerConfiguration", 'String'>
-    readonly workflowId: FieldRef<"TriggerConfiguration", 'String'>
-    readonly nodeId: FieldRef<"TriggerConfiguration", 'String'>
-    readonly type: FieldRef<"TriggerConfiguration", 'String'>
-    readonly config: FieldRef<"TriggerConfiguration", 'Json'>
-    readonly createdAt: FieldRef<"TriggerConfiguration", 'DateTime'>
-    readonly updatedAt: FieldRef<"TriggerConfiguration", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TriggerConfiguration findUnique
-   */
-  export type TriggerConfigurationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter, which TriggerConfiguration to fetch.
-     */
-    where: TriggerConfigurationWhereUniqueInput
-  }
-
-  /**
-   * TriggerConfiguration findUniqueOrThrow
-   */
-  export type TriggerConfigurationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter, which TriggerConfiguration to fetch.
-     */
-    where: TriggerConfigurationWhereUniqueInput
-  }
-
-  /**
-   * TriggerConfiguration findFirst
-   */
-  export type TriggerConfigurationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter, which TriggerConfiguration to fetch.
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TriggerConfigurations to fetch.
-     */
-    orderBy?: TriggerConfigurationOrderByWithRelationInput | TriggerConfigurationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TriggerConfigurations.
-     */
-    cursor?: TriggerConfigurationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TriggerConfigurations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TriggerConfigurations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TriggerConfigurations.
-     */
-    distinct?: TriggerConfigurationScalarFieldEnum | TriggerConfigurationScalarFieldEnum[]
-  }
-
-  /**
-   * TriggerConfiguration findFirstOrThrow
-   */
-  export type TriggerConfigurationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter, which TriggerConfiguration to fetch.
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TriggerConfigurations to fetch.
-     */
-    orderBy?: TriggerConfigurationOrderByWithRelationInput | TriggerConfigurationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TriggerConfigurations.
-     */
-    cursor?: TriggerConfigurationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TriggerConfigurations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TriggerConfigurations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TriggerConfigurations.
-     */
-    distinct?: TriggerConfigurationScalarFieldEnum | TriggerConfigurationScalarFieldEnum[]
-  }
-
-  /**
-   * TriggerConfiguration findMany
-   */
-  export type TriggerConfigurationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter, which TriggerConfigurations to fetch.
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TriggerConfigurations to fetch.
-     */
-    orderBy?: TriggerConfigurationOrderByWithRelationInput | TriggerConfigurationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TriggerConfigurations.
-     */
-    cursor?: TriggerConfigurationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TriggerConfigurations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TriggerConfigurations.
-     */
-    skip?: number
-    distinct?: TriggerConfigurationScalarFieldEnum | TriggerConfigurationScalarFieldEnum[]
-  }
-
-  /**
-   * TriggerConfiguration create
-   */
-  export type TriggerConfigurationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TriggerConfiguration.
-     */
-    data: XOR<TriggerConfigurationCreateInput, TriggerConfigurationUncheckedCreateInput>
-  }
-
-  /**
-   * TriggerConfiguration createMany
-   */
-  export type TriggerConfigurationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TriggerConfigurations.
-     */
-    data: TriggerConfigurationCreateManyInput | TriggerConfigurationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TriggerConfiguration createManyAndReturn
-   */
-  export type TriggerConfigurationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * The data used to create many TriggerConfigurations.
-     */
-    data: TriggerConfigurationCreateManyInput | TriggerConfigurationCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TriggerConfiguration update
-   */
-  export type TriggerConfigurationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TriggerConfiguration.
-     */
-    data: XOR<TriggerConfigurationUpdateInput, TriggerConfigurationUncheckedUpdateInput>
-    /**
-     * Choose, which TriggerConfiguration to update.
-     */
-    where: TriggerConfigurationWhereUniqueInput
-  }
-
-  /**
-   * TriggerConfiguration updateMany
-   */
-  export type TriggerConfigurationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TriggerConfigurations.
-     */
-    data: XOR<TriggerConfigurationUpdateManyMutationInput, TriggerConfigurationUncheckedUpdateManyInput>
-    /**
-     * Filter which TriggerConfigurations to update
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * Limit how many TriggerConfigurations to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TriggerConfiguration updateManyAndReturn
-   */
-  export type TriggerConfigurationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * The data used to update TriggerConfigurations.
-     */
-    data: XOR<TriggerConfigurationUpdateManyMutationInput, TriggerConfigurationUncheckedUpdateManyInput>
-    /**
-     * Filter which TriggerConfigurations to update
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * Limit how many TriggerConfigurations to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TriggerConfiguration upsert
-   */
-  export type TriggerConfigurationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TriggerConfiguration to update in case it exists.
-     */
-    where: TriggerConfigurationWhereUniqueInput
-    /**
-     * In case the TriggerConfiguration found by the `where` argument doesn't exist, create a new TriggerConfiguration with this data.
-     */
-    create: XOR<TriggerConfigurationCreateInput, TriggerConfigurationUncheckedCreateInput>
-    /**
-     * In case the TriggerConfiguration was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TriggerConfigurationUpdateInput, TriggerConfigurationUncheckedUpdateInput>
-  }
-
-  /**
-   * TriggerConfiguration delete
-   */
-  export type TriggerConfigurationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-    /**
-     * Filter which TriggerConfiguration to delete.
-     */
-    where: TriggerConfigurationWhereUniqueInput
-  }
-
-  /**
-   * TriggerConfiguration deleteMany
-   */
-  export type TriggerConfigurationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TriggerConfigurations to delete
-     */
-    where?: TriggerConfigurationWhereInput
-    /**
-     * Limit how many TriggerConfigurations to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TriggerConfiguration.workflow
-   */
-  export type TriggerConfiguration$workflowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Workflow
-     */
-    select?: WorkflowSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Workflow
-     */
-    omit?: WorkflowOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WorkflowInclude<ExtArgs> | null
-    where?: WorkflowWhereInput
-  }
-
-  /**
-   * TriggerConfiguration.WorkflowNode
-   */
-  export type TriggerConfiguration$WorkflowNodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WorkflowNode
-     */
-    select?: WorkflowNodeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WorkflowNode
-     */
-    omit?: WorkflowNodeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WorkflowNodeInclude<ExtArgs> | null
-    where?: WorkflowNodeWhereInput
-  }
-
-  /**
-   * TriggerConfiguration without action
-   */
-  export type TriggerConfigurationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TriggerConfiguration
-     */
-    select?: TriggerConfigurationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TriggerConfiguration
-     */
-    omit?: TriggerConfigurationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TriggerConfigurationInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model ExecutionHistory
    */
 
@@ -8486,6 +7384,8 @@ export namespace Prisma {
     finishedAt?: boolean
     log?: boolean
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
+    nodeExecutionHistories?: boolean | ExecutionHistory$nodeExecutionHistoriesArgs<ExtArgs>
+    _count?: boolean | ExecutionHistoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["executionHistory"]>
 
   export type ExecutionHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8520,6 +7420,8 @@ export namespace Prisma {
   export type ExecutionHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowId" | "status" | "startedAt" | "finishedAt" | "log", ExtArgs["result"]["executionHistory"]>
   export type ExecutionHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
+    nodeExecutionHistories?: boolean | ExecutionHistory$nodeExecutionHistoriesArgs<ExtArgs>
+    _count?: boolean | ExecutionHistoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExecutionHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workflow?: boolean | WorkflowDefaultArgs<ExtArgs>
@@ -8532,6 +7434,7 @@ export namespace Prisma {
     name: "ExecutionHistory"
     objects: {
       workflow: Prisma.$WorkflowPayload<ExtArgs>
+      nodeExecutionHistories: Prisma.$NodeExecutionHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8935,6 +7838,7 @@ export namespace Prisma {
   export interface Prisma__ExecutionHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     workflow<T extends WorkflowDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkflowDefaultArgs<ExtArgs>>): Prisma__WorkflowClient<$Result.GetResult<Prisma.$WorkflowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    nodeExecutionHistories<T extends ExecutionHistory$nodeExecutionHistoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionHistory$nodeExecutionHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9366,6 +8270,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExecutionHistory.nodeExecutionHistories
+   */
+  export type ExecutionHistory$nodeExecutionHistoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    where?: NodeExecutionHistoryWhereInput
+    orderBy?: NodeExecutionHistoryOrderByWithRelationInput | NodeExecutionHistoryOrderByWithRelationInput[]
+    cursor?: NodeExecutionHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NodeExecutionHistoryScalarFieldEnum | NodeExecutionHistoryScalarFieldEnum[]
+  }
+
+  /**
    * ExecutionHistory without action
    */
   export type ExecutionHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9381,6 +8309,1082 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ExecutionHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NodeExecutionHistory
+   */
+
+  export type AggregateNodeExecutionHistory = {
+    _count: NodeExecutionHistoryCountAggregateOutputType | null
+    _min: NodeExecutionHistoryMinAggregateOutputType | null
+    _max: NodeExecutionHistoryMaxAggregateOutputType | null
+  }
+
+  export type NodeExecutionHistoryMinAggregateOutputType = {
+    id: string | null
+    workflowExecutionId: string | null
+    nodeId: string | null
+    status: string | null
+    timestamp: Date | null
+  }
+
+  export type NodeExecutionHistoryMaxAggregateOutputType = {
+    id: string | null
+    workflowExecutionId: string | null
+    nodeId: string | null
+    status: string | null
+    timestamp: Date | null
+  }
+
+  export type NodeExecutionHistoryCountAggregateOutputType = {
+    id: number
+    workflowExecutionId: number
+    nodeId: number
+    input: number
+    output: number
+    status: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type NodeExecutionHistoryMinAggregateInputType = {
+    id?: true
+    workflowExecutionId?: true
+    nodeId?: true
+    status?: true
+    timestamp?: true
+  }
+
+  export type NodeExecutionHistoryMaxAggregateInputType = {
+    id?: true
+    workflowExecutionId?: true
+    nodeId?: true
+    status?: true
+    timestamp?: true
+  }
+
+  export type NodeExecutionHistoryCountAggregateInputType = {
+    id?: true
+    workflowExecutionId?: true
+    nodeId?: true
+    input?: true
+    output?: true
+    status?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type NodeExecutionHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NodeExecutionHistory to aggregate.
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeExecutionHistories to fetch.
+     */
+    orderBy?: NodeExecutionHistoryOrderByWithRelationInput | NodeExecutionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NodeExecutionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeExecutionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeExecutionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NodeExecutionHistories
+    **/
+    _count?: true | NodeExecutionHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NodeExecutionHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NodeExecutionHistoryMaxAggregateInputType
+  }
+
+  export type GetNodeExecutionHistoryAggregateType<T extends NodeExecutionHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateNodeExecutionHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNodeExecutionHistory[P]>
+      : GetScalarType<T[P], AggregateNodeExecutionHistory[P]>
+  }
+
+
+
+
+  export type NodeExecutionHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NodeExecutionHistoryWhereInput
+    orderBy?: NodeExecutionHistoryOrderByWithAggregationInput | NodeExecutionHistoryOrderByWithAggregationInput[]
+    by: NodeExecutionHistoryScalarFieldEnum[] | NodeExecutionHistoryScalarFieldEnum
+    having?: NodeExecutionHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NodeExecutionHistoryCountAggregateInputType | true
+    _min?: NodeExecutionHistoryMinAggregateInputType
+    _max?: NodeExecutionHistoryMaxAggregateInputType
+  }
+
+  export type NodeExecutionHistoryGroupByOutputType = {
+    id: string
+    workflowExecutionId: string
+    nodeId: string
+    input: JsonValue
+    output: JsonValue
+    status: string
+    timestamp: Date
+    _count: NodeExecutionHistoryCountAggregateOutputType | null
+    _min: NodeExecutionHistoryMinAggregateOutputType | null
+    _max: NodeExecutionHistoryMaxAggregateOutputType | null
+  }
+
+  type GetNodeExecutionHistoryGroupByPayload<T extends NodeExecutionHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NodeExecutionHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NodeExecutionHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NodeExecutionHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], NodeExecutionHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NodeExecutionHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflowExecutionId?: boolean
+    nodeId?: boolean
+    input?: boolean
+    output?: boolean
+    status?: boolean
+    timestamp?: boolean
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeExecutionHistory"]>
+
+  export type NodeExecutionHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflowExecutionId?: boolean
+    nodeId?: boolean
+    input?: boolean
+    output?: boolean
+    status?: boolean
+    timestamp?: boolean
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeExecutionHistory"]>
+
+  export type NodeExecutionHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflowExecutionId?: boolean
+    nodeId?: boolean
+    input?: boolean
+    output?: boolean
+    status?: boolean
+    timestamp?: boolean
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeExecutionHistory"]>
+
+  export type NodeExecutionHistorySelectScalar = {
+    id?: boolean
+    workflowExecutionId?: boolean
+    nodeId?: boolean
+    input?: boolean
+    output?: boolean
+    status?: boolean
+    timestamp?: boolean
+  }
+
+  export type NodeExecutionHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflowExecutionId" | "nodeId" | "input" | "output" | "status" | "timestamp", ExtArgs["result"]["nodeExecutionHistory"]>
+  export type NodeExecutionHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }
+  export type NodeExecutionHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }
+  export type NodeExecutionHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    executionHistory?: boolean | ExecutionHistoryDefaultArgs<ExtArgs>
+  }
+
+  export type $NodeExecutionHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NodeExecutionHistory"
+    objects: {
+      executionHistory: Prisma.$ExecutionHistoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workflowExecutionId: string
+      nodeId: string
+      input: Prisma.JsonValue
+      output: Prisma.JsonValue
+      status: string
+      timestamp: Date
+    }, ExtArgs["result"]["nodeExecutionHistory"]>
+    composites: {}
+  }
+
+  type NodeExecutionHistoryGetPayload<S extends boolean | null | undefined | NodeExecutionHistoryDefaultArgs> = $Result.GetResult<Prisma.$NodeExecutionHistoryPayload, S>
+
+  type NodeExecutionHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NodeExecutionHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NodeExecutionHistoryCountAggregateInputType | true
+    }
+
+  export interface NodeExecutionHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NodeExecutionHistory'], meta: { name: 'NodeExecutionHistory' } }
+    /**
+     * Find zero or one NodeExecutionHistory that matches the filter.
+     * @param {NodeExecutionHistoryFindUniqueArgs} args - Arguments to find a NodeExecutionHistory
+     * @example
+     * // Get one NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NodeExecutionHistoryFindUniqueArgs>(args: SelectSubset<T, NodeExecutionHistoryFindUniqueArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NodeExecutionHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NodeExecutionHistoryFindUniqueOrThrowArgs} args - Arguments to find a NodeExecutionHistory
+     * @example
+     * // Get one NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NodeExecutionHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, NodeExecutionHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NodeExecutionHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryFindFirstArgs} args - Arguments to find a NodeExecutionHistory
+     * @example
+     * // Get one NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NodeExecutionHistoryFindFirstArgs>(args?: SelectSubset<T, NodeExecutionHistoryFindFirstArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NodeExecutionHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryFindFirstOrThrowArgs} args - Arguments to find a NodeExecutionHistory
+     * @example
+     * // Get one NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NodeExecutionHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, NodeExecutionHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NodeExecutionHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NodeExecutionHistories
+     * const nodeExecutionHistories = await prisma.nodeExecutionHistory.findMany()
+     * 
+     * // Get first 10 NodeExecutionHistories
+     * const nodeExecutionHistories = await prisma.nodeExecutionHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nodeExecutionHistoryWithIdOnly = await prisma.nodeExecutionHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NodeExecutionHistoryFindManyArgs>(args?: SelectSubset<T, NodeExecutionHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NodeExecutionHistory.
+     * @param {NodeExecutionHistoryCreateArgs} args - Arguments to create a NodeExecutionHistory.
+     * @example
+     * // Create one NodeExecutionHistory
+     * const NodeExecutionHistory = await prisma.nodeExecutionHistory.create({
+     *   data: {
+     *     // ... data to create a NodeExecutionHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends NodeExecutionHistoryCreateArgs>(args: SelectSubset<T, NodeExecutionHistoryCreateArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NodeExecutionHistories.
+     * @param {NodeExecutionHistoryCreateManyArgs} args - Arguments to create many NodeExecutionHistories.
+     * @example
+     * // Create many NodeExecutionHistories
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NodeExecutionHistoryCreateManyArgs>(args?: SelectSubset<T, NodeExecutionHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NodeExecutionHistories and returns the data saved in the database.
+     * @param {NodeExecutionHistoryCreateManyAndReturnArgs} args - Arguments to create many NodeExecutionHistories.
+     * @example
+     * // Create many NodeExecutionHistories
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NodeExecutionHistories and only return the `id`
+     * const nodeExecutionHistoryWithIdOnly = await prisma.nodeExecutionHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NodeExecutionHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, NodeExecutionHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NodeExecutionHistory.
+     * @param {NodeExecutionHistoryDeleteArgs} args - Arguments to delete one NodeExecutionHistory.
+     * @example
+     * // Delete one NodeExecutionHistory
+     * const NodeExecutionHistory = await prisma.nodeExecutionHistory.delete({
+     *   where: {
+     *     // ... filter to delete one NodeExecutionHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NodeExecutionHistoryDeleteArgs>(args: SelectSubset<T, NodeExecutionHistoryDeleteArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NodeExecutionHistory.
+     * @param {NodeExecutionHistoryUpdateArgs} args - Arguments to update one NodeExecutionHistory.
+     * @example
+     * // Update one NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NodeExecutionHistoryUpdateArgs>(args: SelectSubset<T, NodeExecutionHistoryUpdateArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NodeExecutionHistories.
+     * @param {NodeExecutionHistoryDeleteManyArgs} args - Arguments to filter NodeExecutionHistories to delete.
+     * @example
+     * // Delete a few NodeExecutionHistories
+     * const { count } = await prisma.nodeExecutionHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NodeExecutionHistoryDeleteManyArgs>(args?: SelectSubset<T, NodeExecutionHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NodeExecutionHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NodeExecutionHistories
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NodeExecutionHistoryUpdateManyArgs>(args: SelectSubset<T, NodeExecutionHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NodeExecutionHistories and returns the data updated in the database.
+     * @param {NodeExecutionHistoryUpdateManyAndReturnArgs} args - Arguments to update many NodeExecutionHistories.
+     * @example
+     * // Update many NodeExecutionHistories
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NodeExecutionHistories and only return the `id`
+     * const nodeExecutionHistoryWithIdOnly = await prisma.nodeExecutionHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NodeExecutionHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, NodeExecutionHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NodeExecutionHistory.
+     * @param {NodeExecutionHistoryUpsertArgs} args - Arguments to update or create a NodeExecutionHistory.
+     * @example
+     * // Update or create a NodeExecutionHistory
+     * const nodeExecutionHistory = await prisma.nodeExecutionHistory.upsert({
+     *   create: {
+     *     // ... data to create a NodeExecutionHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NodeExecutionHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NodeExecutionHistoryUpsertArgs>(args: SelectSubset<T, NodeExecutionHistoryUpsertArgs<ExtArgs>>): Prisma__NodeExecutionHistoryClient<$Result.GetResult<Prisma.$NodeExecutionHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NodeExecutionHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryCountArgs} args - Arguments to filter NodeExecutionHistories to count.
+     * @example
+     * // Count the number of NodeExecutionHistories
+     * const count = await prisma.nodeExecutionHistory.count({
+     *   where: {
+     *     // ... the filter for the NodeExecutionHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends NodeExecutionHistoryCountArgs>(
+      args?: Subset<T, NodeExecutionHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NodeExecutionHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NodeExecutionHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NodeExecutionHistoryAggregateArgs>(args: Subset<T, NodeExecutionHistoryAggregateArgs>): Prisma.PrismaPromise<GetNodeExecutionHistoryAggregateType<T>>
+
+    /**
+     * Group by NodeExecutionHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeExecutionHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NodeExecutionHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NodeExecutionHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: NodeExecutionHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NodeExecutionHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNodeExecutionHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NodeExecutionHistory model
+   */
+  readonly fields: NodeExecutionHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NodeExecutionHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NodeExecutionHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    executionHistory<T extends ExecutionHistoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExecutionHistoryDefaultArgs<ExtArgs>>): Prisma__ExecutionHistoryClient<$Result.GetResult<Prisma.$ExecutionHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NodeExecutionHistory model
+   */
+  interface NodeExecutionHistoryFieldRefs {
+    readonly id: FieldRef<"NodeExecutionHistory", 'String'>
+    readonly workflowExecutionId: FieldRef<"NodeExecutionHistory", 'String'>
+    readonly nodeId: FieldRef<"NodeExecutionHistory", 'String'>
+    readonly input: FieldRef<"NodeExecutionHistory", 'Json'>
+    readonly output: FieldRef<"NodeExecutionHistory", 'Json'>
+    readonly status: FieldRef<"NodeExecutionHistory", 'String'>
+    readonly timestamp: FieldRef<"NodeExecutionHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NodeExecutionHistory findUnique
+   */
+  export type NodeExecutionHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeExecutionHistory to fetch.
+     */
+    where: NodeExecutionHistoryWhereUniqueInput
+  }
+
+  /**
+   * NodeExecutionHistory findUniqueOrThrow
+   */
+  export type NodeExecutionHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeExecutionHistory to fetch.
+     */
+    where: NodeExecutionHistoryWhereUniqueInput
+  }
+
+  /**
+   * NodeExecutionHistory findFirst
+   */
+  export type NodeExecutionHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeExecutionHistory to fetch.
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeExecutionHistories to fetch.
+     */
+    orderBy?: NodeExecutionHistoryOrderByWithRelationInput | NodeExecutionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NodeExecutionHistories.
+     */
+    cursor?: NodeExecutionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeExecutionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeExecutionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NodeExecutionHistories.
+     */
+    distinct?: NodeExecutionHistoryScalarFieldEnum | NodeExecutionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * NodeExecutionHistory findFirstOrThrow
+   */
+  export type NodeExecutionHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeExecutionHistory to fetch.
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeExecutionHistories to fetch.
+     */
+    orderBy?: NodeExecutionHistoryOrderByWithRelationInput | NodeExecutionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NodeExecutionHistories.
+     */
+    cursor?: NodeExecutionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeExecutionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeExecutionHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NodeExecutionHistories.
+     */
+    distinct?: NodeExecutionHistoryScalarFieldEnum | NodeExecutionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * NodeExecutionHistory findMany
+   */
+  export type NodeExecutionHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeExecutionHistories to fetch.
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeExecutionHistories to fetch.
+     */
+    orderBy?: NodeExecutionHistoryOrderByWithRelationInput | NodeExecutionHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NodeExecutionHistories.
+     */
+    cursor?: NodeExecutionHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeExecutionHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeExecutionHistories.
+     */
+    skip?: number
+    distinct?: NodeExecutionHistoryScalarFieldEnum | NodeExecutionHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * NodeExecutionHistory create
+   */
+  export type NodeExecutionHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NodeExecutionHistory.
+     */
+    data: XOR<NodeExecutionHistoryCreateInput, NodeExecutionHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * NodeExecutionHistory createMany
+   */
+  export type NodeExecutionHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NodeExecutionHistories.
+     */
+    data: NodeExecutionHistoryCreateManyInput | NodeExecutionHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NodeExecutionHistory createManyAndReturn
+   */
+  export type NodeExecutionHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many NodeExecutionHistories.
+     */
+    data: NodeExecutionHistoryCreateManyInput | NodeExecutionHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NodeExecutionHistory update
+   */
+  export type NodeExecutionHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NodeExecutionHistory.
+     */
+    data: XOR<NodeExecutionHistoryUpdateInput, NodeExecutionHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which NodeExecutionHistory to update.
+     */
+    where: NodeExecutionHistoryWhereUniqueInput
+  }
+
+  /**
+   * NodeExecutionHistory updateMany
+   */
+  export type NodeExecutionHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NodeExecutionHistories.
+     */
+    data: XOR<NodeExecutionHistoryUpdateManyMutationInput, NodeExecutionHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which NodeExecutionHistories to update
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * Limit how many NodeExecutionHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NodeExecutionHistory updateManyAndReturn
+   */
+  export type NodeExecutionHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update NodeExecutionHistories.
+     */
+    data: XOR<NodeExecutionHistoryUpdateManyMutationInput, NodeExecutionHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which NodeExecutionHistories to update
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * Limit how many NodeExecutionHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NodeExecutionHistory upsert
+   */
+  export type NodeExecutionHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NodeExecutionHistory to update in case it exists.
+     */
+    where: NodeExecutionHistoryWhereUniqueInput
+    /**
+     * In case the NodeExecutionHistory found by the `where` argument doesn't exist, create a new NodeExecutionHistory with this data.
+     */
+    create: XOR<NodeExecutionHistoryCreateInput, NodeExecutionHistoryUncheckedCreateInput>
+    /**
+     * In case the NodeExecutionHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NodeExecutionHistoryUpdateInput, NodeExecutionHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * NodeExecutionHistory delete
+   */
+  export type NodeExecutionHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which NodeExecutionHistory to delete.
+     */
+    where: NodeExecutionHistoryWhereUniqueInput
+  }
+
+  /**
+   * NodeExecutionHistory deleteMany
+   */
+  export type NodeExecutionHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NodeExecutionHistories to delete
+     */
+    where?: NodeExecutionHistoryWhereInput
+    /**
+     * Limit how many NodeExecutionHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NodeExecutionHistory without action
+   */
+  export type NodeExecutionHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeExecutionHistory
+     */
+    select?: NodeExecutionHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeExecutionHistory
+     */
+    omit?: NodeExecutionHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeExecutionHistoryInclude<ExtArgs> | null
   }
 
 
@@ -9428,7 +9432,8 @@ export namespace Prisma {
     name: 'name',
     isActive: 'isActive',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    trigger: 'trigger'
   };
 
   export type WorkflowScalarFieldEnum = (typeof WorkflowScalarFieldEnum)[keyof typeof WorkflowScalarFieldEnum]
@@ -9442,7 +9447,9 @@ export namespace Prisma {
     positionX: 'positionX',
     positionY: 'positionY',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    credentialId: 'credentialId',
+    trigger: 'trigger'
   };
 
   export type WorkflowNodeScalarFieldEnum = (typeof WorkflowNodeScalarFieldEnum)[keyof typeof WorkflowNodeScalarFieldEnum]
@@ -9460,19 +9467,6 @@ export namespace Prisma {
   export type WorkflowNodeLinkScalarFieldEnum = (typeof WorkflowNodeLinkScalarFieldEnum)[keyof typeof WorkflowNodeLinkScalarFieldEnum]
 
 
-  export const TriggerConfigurationScalarFieldEnum: {
-    id: 'id',
-    workflowId: 'workflowId',
-    nodeId: 'nodeId',
-    type: 'type',
-    config: 'config',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type TriggerConfigurationScalarFieldEnum = (typeof TriggerConfigurationScalarFieldEnum)[keyof typeof TriggerConfigurationScalarFieldEnum]
-
-
   export const ExecutionHistoryScalarFieldEnum: {
     id: 'id',
     workflowId: 'workflowId',
@@ -9483,6 +9477,19 @@ export namespace Prisma {
   };
 
   export type ExecutionHistoryScalarFieldEnum = (typeof ExecutionHistoryScalarFieldEnum)[keyof typeof ExecutionHistoryScalarFieldEnum]
+
+
+  export const NodeExecutionHistoryScalarFieldEnum: {
+    id: 'id',
+    workflowExecutionId: 'workflowExecutionId',
+    nodeId: 'nodeId',
+    input: 'input',
+    output: 'output',
+    status: 'status',
+    timestamp: 'timestamp'
+  };
+
+  export type NodeExecutionHistoryScalarFieldEnum = (typeof NodeExecutionHistoryScalarFieldEnum)[keyof typeof NodeExecutionHistoryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9743,10 +9750,10 @@ export namespace Prisma {
     isActive?: BoolFilter<"Workflow"> | boolean
     createdAt?: DateTimeFilter<"Workflow"> | Date | string
     updatedAt?: DateTimeFilter<"Workflow"> | Date | string
+    trigger?: StringFilter<"Workflow"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     nodes?: WorkflowNodeListRelationFilter
     nodeLinks?: WorkflowNodeLinkListRelationFilter
-    triggerConfig?: XOR<TriggerConfigurationNullableScalarRelationFilter, TriggerConfigurationWhereInput> | null
     executionHistories?: ExecutionHistoryListRelationFilter
   }
 
@@ -9757,10 +9764,10 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trigger?: SortOrder
     user?: UserOrderByWithRelationInput
     nodes?: WorkflowNodeOrderByRelationAggregateInput
     nodeLinks?: WorkflowNodeLinkOrderByRelationAggregateInput
-    triggerConfig?: TriggerConfigurationOrderByWithRelationInput
     executionHistories?: ExecutionHistoryOrderByRelationAggregateInput
   }
 
@@ -9774,10 +9781,10 @@ export namespace Prisma {
     isActive?: BoolFilter<"Workflow"> | boolean
     createdAt?: DateTimeFilter<"Workflow"> | Date | string
     updatedAt?: DateTimeFilter<"Workflow"> | Date | string
+    trigger?: StringFilter<"Workflow"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     nodes?: WorkflowNodeListRelationFilter
     nodeLinks?: WorkflowNodeLinkListRelationFilter
-    triggerConfig?: XOR<TriggerConfigurationNullableScalarRelationFilter, TriggerConfigurationWhereInput> | null
     executionHistories?: ExecutionHistoryListRelationFilter
   }, "id">
 
@@ -9788,6 +9795,7 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trigger?: SortOrder
     _count?: WorkflowCountOrderByAggregateInput
     _max?: WorkflowMaxOrderByAggregateInput
     _min?: WorkflowMinOrderByAggregateInput
@@ -9803,6 +9811,7 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"Workflow"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Workflow"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Workflow"> | Date | string
+    trigger?: StringWithAggregatesFilter<"Workflow"> | string
   }
 
   export type WorkflowNodeWhereInput = {
@@ -9817,10 +9826,11 @@ export namespace Prisma {
     positionY?: IntNullableFilter<"WorkflowNode"> | number | null
     createdAt?: DateTimeFilter<"WorkflowNode"> | Date | string
     updatedAt?: DateTimeFilter<"WorkflowNode"> | Date | string
+    credentialId?: StringNullableFilter<"WorkflowNode"> | string | null
+    trigger?: StringFilter<"WorkflowNode"> | string
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
     outgoingLinks?: WorkflowNodeLinkListRelationFilter
     incomingLinks?: WorkflowNodeLinkListRelationFilter
-    triggerConfiguration?: XOR<TriggerConfigurationNullableScalarRelationFilter, TriggerConfigurationWhereInput> | null
   }
 
   export type WorkflowNodeOrderByWithRelationInput = {
@@ -9832,10 +9842,11 @@ export namespace Prisma {
     positionY?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    credentialId?: SortOrderInput | SortOrder
+    trigger?: SortOrder
     workflow?: WorkflowOrderByWithRelationInput
     outgoingLinks?: WorkflowNodeLinkOrderByRelationAggregateInput
     incomingLinks?: WorkflowNodeLinkOrderByRelationAggregateInput
-    triggerConfiguration?: TriggerConfigurationOrderByWithRelationInput
   }
 
   export type WorkflowNodeWhereUniqueInput = Prisma.AtLeast<{
@@ -9850,10 +9861,11 @@ export namespace Prisma {
     positionY?: IntNullableFilter<"WorkflowNode"> | number | null
     createdAt?: DateTimeFilter<"WorkflowNode"> | Date | string
     updatedAt?: DateTimeFilter<"WorkflowNode"> | Date | string
+    credentialId?: StringNullableFilter<"WorkflowNode"> | string | null
+    trigger?: StringFilter<"WorkflowNode"> | string
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
     outgoingLinks?: WorkflowNodeLinkListRelationFilter
     incomingLinks?: WorkflowNodeLinkListRelationFilter
-    triggerConfiguration?: XOR<TriggerConfigurationNullableScalarRelationFilter, TriggerConfigurationWhereInput> | null
   }, "id">
 
   export type WorkflowNodeOrderByWithAggregationInput = {
@@ -9865,6 +9877,8 @@ export namespace Prisma {
     positionY?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    credentialId?: SortOrderInput | SortOrder
+    trigger?: SortOrder
     _count?: WorkflowNodeCountOrderByAggregateInput
     _avg?: WorkflowNodeAvgOrderByAggregateInput
     _max?: WorkflowNodeMaxOrderByAggregateInput
@@ -9884,6 +9898,8 @@ export namespace Prisma {
     positionY?: IntNullableWithAggregatesFilter<"WorkflowNode"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"WorkflowNode"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"WorkflowNode"> | Date | string
+    credentialId?: StringNullableWithAggregatesFilter<"WorkflowNode"> | string | null
+    trigger?: StringWithAggregatesFilter<"WorkflowNode"> | string
   }
 
   export type WorkflowNodeLinkWhereInput = {
@@ -9952,74 +9968,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"WorkflowNodeLink"> | Date | string
   }
 
-  export type TriggerConfigurationWhereInput = {
-    AND?: TriggerConfigurationWhereInput | TriggerConfigurationWhereInput[]
-    OR?: TriggerConfigurationWhereInput[]
-    NOT?: TriggerConfigurationWhereInput | TriggerConfigurationWhereInput[]
-    id?: StringFilter<"TriggerConfiguration"> | string
-    workflowId?: StringNullableFilter<"TriggerConfiguration"> | string | null
-    nodeId?: StringNullableFilter<"TriggerConfiguration"> | string | null
-    type?: StringFilter<"TriggerConfiguration"> | string
-    config?: JsonFilter<"TriggerConfiguration">
-    createdAt?: DateTimeFilter<"TriggerConfiguration"> | Date | string
-    updatedAt?: DateTimeFilter<"TriggerConfiguration"> | Date | string
-    workflow?: XOR<WorkflowNullableScalarRelationFilter, WorkflowWhereInput> | null
-    WorkflowNode?: XOR<WorkflowNodeNullableScalarRelationFilter, WorkflowNodeWhereInput> | null
-  }
-
-  export type TriggerConfigurationOrderByWithRelationInput = {
-    id?: SortOrder
-    workflowId?: SortOrderInput | SortOrder
-    nodeId?: SortOrderInput | SortOrder
-    type?: SortOrder
-    config?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    workflow?: WorkflowOrderByWithRelationInput
-    WorkflowNode?: WorkflowNodeOrderByWithRelationInput
-  }
-
-  export type TriggerConfigurationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    workflowId?: string
-    nodeId?: string
-    AND?: TriggerConfigurationWhereInput | TriggerConfigurationWhereInput[]
-    OR?: TriggerConfigurationWhereInput[]
-    NOT?: TriggerConfigurationWhereInput | TriggerConfigurationWhereInput[]
-    type?: StringFilter<"TriggerConfiguration"> | string
-    config?: JsonFilter<"TriggerConfiguration">
-    createdAt?: DateTimeFilter<"TriggerConfiguration"> | Date | string
-    updatedAt?: DateTimeFilter<"TriggerConfiguration"> | Date | string
-    workflow?: XOR<WorkflowNullableScalarRelationFilter, WorkflowWhereInput> | null
-    WorkflowNode?: XOR<WorkflowNodeNullableScalarRelationFilter, WorkflowNodeWhereInput> | null
-  }, "id" | "workflowId" | "nodeId">
-
-  export type TriggerConfigurationOrderByWithAggregationInput = {
-    id?: SortOrder
-    workflowId?: SortOrderInput | SortOrder
-    nodeId?: SortOrderInput | SortOrder
-    type?: SortOrder
-    config?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: TriggerConfigurationCountOrderByAggregateInput
-    _max?: TriggerConfigurationMaxOrderByAggregateInput
-    _min?: TriggerConfigurationMinOrderByAggregateInput
-  }
-
-  export type TriggerConfigurationScalarWhereWithAggregatesInput = {
-    AND?: TriggerConfigurationScalarWhereWithAggregatesInput | TriggerConfigurationScalarWhereWithAggregatesInput[]
-    OR?: TriggerConfigurationScalarWhereWithAggregatesInput[]
-    NOT?: TriggerConfigurationScalarWhereWithAggregatesInput | TriggerConfigurationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TriggerConfiguration"> | string
-    workflowId?: StringNullableWithAggregatesFilter<"TriggerConfiguration"> | string | null
-    nodeId?: StringNullableWithAggregatesFilter<"TriggerConfiguration"> | string | null
-    type?: StringWithAggregatesFilter<"TriggerConfiguration"> | string
-    config?: JsonWithAggregatesFilter<"TriggerConfiguration">
-    createdAt?: DateTimeWithAggregatesFilter<"TriggerConfiguration"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TriggerConfiguration"> | Date | string
-  }
-
   export type ExecutionHistoryWhereInput = {
     AND?: ExecutionHistoryWhereInput | ExecutionHistoryWhereInput[]
     OR?: ExecutionHistoryWhereInput[]
@@ -10031,6 +9979,7 @@ export namespace Prisma {
     finishedAt?: DateTimeNullableFilter<"ExecutionHistory"> | Date | string | null
     log?: JsonFilter<"ExecutionHistory">
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
+    nodeExecutionHistories?: NodeExecutionHistoryListRelationFilter
   }
 
   export type ExecutionHistoryOrderByWithRelationInput = {
@@ -10041,6 +9990,7 @@ export namespace Prisma {
     finishedAt?: SortOrderInput | SortOrder
     log?: SortOrder
     workflow?: WorkflowOrderByWithRelationInput
+    nodeExecutionHistories?: NodeExecutionHistoryOrderByRelationAggregateInput
   }
 
   export type ExecutionHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -10054,6 +10004,7 @@ export namespace Prisma {
     finishedAt?: DateTimeNullableFilter<"ExecutionHistory"> | Date | string | null
     log?: JsonFilter<"ExecutionHistory">
     workflow?: XOR<WorkflowScalarRelationFilter, WorkflowWhereInput>
+    nodeExecutionHistories?: NodeExecutionHistoryListRelationFilter
   }, "id">
 
   export type ExecutionHistoryOrderByWithAggregationInput = {
@@ -10078,6 +10029,71 @@ export namespace Prisma {
     startedAt?: DateTimeWithAggregatesFilter<"ExecutionHistory"> | Date | string
     finishedAt?: DateTimeNullableWithAggregatesFilter<"ExecutionHistory"> | Date | string | null
     log?: JsonWithAggregatesFilter<"ExecutionHistory">
+  }
+
+  export type NodeExecutionHistoryWhereInput = {
+    AND?: NodeExecutionHistoryWhereInput | NodeExecutionHistoryWhereInput[]
+    OR?: NodeExecutionHistoryWhereInput[]
+    NOT?: NodeExecutionHistoryWhereInput | NodeExecutionHistoryWhereInput[]
+    id?: StringFilter<"NodeExecutionHistory"> | string
+    workflowExecutionId?: StringFilter<"NodeExecutionHistory"> | string
+    nodeId?: StringFilter<"NodeExecutionHistory"> | string
+    input?: JsonFilter<"NodeExecutionHistory">
+    output?: JsonFilter<"NodeExecutionHistory">
+    status?: StringFilter<"NodeExecutionHistory"> | string
+    timestamp?: DateTimeFilter<"NodeExecutionHistory"> | Date | string
+    executionHistory?: XOR<ExecutionHistoryScalarRelationFilter, ExecutionHistoryWhereInput>
+  }
+
+  export type NodeExecutionHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    workflowExecutionId?: SortOrder
+    nodeId?: SortOrder
+    input?: SortOrder
+    output?: SortOrder
+    status?: SortOrder
+    timestamp?: SortOrder
+    executionHistory?: ExecutionHistoryOrderByWithRelationInput
+  }
+
+  export type NodeExecutionHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: NodeExecutionHistoryWhereInput | NodeExecutionHistoryWhereInput[]
+    OR?: NodeExecutionHistoryWhereInput[]
+    NOT?: NodeExecutionHistoryWhereInput | NodeExecutionHistoryWhereInput[]
+    workflowExecutionId?: StringFilter<"NodeExecutionHistory"> | string
+    nodeId?: StringFilter<"NodeExecutionHistory"> | string
+    input?: JsonFilter<"NodeExecutionHistory">
+    output?: JsonFilter<"NodeExecutionHistory">
+    status?: StringFilter<"NodeExecutionHistory"> | string
+    timestamp?: DateTimeFilter<"NodeExecutionHistory"> | Date | string
+    executionHistory?: XOR<ExecutionHistoryScalarRelationFilter, ExecutionHistoryWhereInput>
+  }, "id">
+
+  export type NodeExecutionHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    workflowExecutionId?: SortOrder
+    nodeId?: SortOrder
+    input?: SortOrder
+    output?: SortOrder
+    status?: SortOrder
+    timestamp?: SortOrder
+    _count?: NodeExecutionHistoryCountOrderByAggregateInput
+    _max?: NodeExecutionHistoryMaxOrderByAggregateInput
+    _min?: NodeExecutionHistoryMinOrderByAggregateInput
+  }
+
+  export type NodeExecutionHistoryScalarWhereWithAggregatesInput = {
+    AND?: NodeExecutionHistoryScalarWhereWithAggregatesInput | NodeExecutionHistoryScalarWhereWithAggregatesInput[]
+    OR?: NodeExecutionHistoryScalarWhereWithAggregatesInput[]
+    NOT?: NodeExecutionHistoryScalarWhereWithAggregatesInput | NodeExecutionHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NodeExecutionHistory"> | string
+    workflowExecutionId?: StringWithAggregatesFilter<"NodeExecutionHistory"> | string
+    nodeId?: StringWithAggregatesFilter<"NodeExecutionHistory"> | string
+    input?: JsonWithAggregatesFilter<"NodeExecutionHistory">
+    output?: JsonWithAggregatesFilter<"NodeExecutionHistory">
+    status?: StringWithAggregatesFilter<"NodeExecutionHistory"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"NodeExecutionHistory"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -10219,10 +10235,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     user: UserCreateNestedOneWithoutWorkflowsInput
     nodes?: WorkflowNodeCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryCreateNestedManyWithoutWorkflowInput
   }
 
@@ -10233,9 +10249,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodes?: WorkflowNodeUncheckedCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -10245,10 +10261,10 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutWorkflowsNestedInput
     nodes?: WorkflowNodeUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -10259,9 +10275,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodes?: WorkflowNodeUncheckedUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -10272,6 +10288,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
   }
 
   export type WorkflowUpdateManyMutationInput = {
@@ -10280,6 +10297,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowUncheckedUpdateManyInput = {
@@ -10289,6 +10307,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowNodeCreateInput = {
@@ -10299,10 +10318,11 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     workflow: WorkflowCreateNestedOneWithoutNodesInput
     outgoingLinks?: WorkflowNodeLinkCreateNestedManyWithoutFromNodeInput
     incomingLinks?: WorkflowNodeLinkCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeUncheckedCreateInput = {
@@ -10314,9 +10334,10 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     outgoingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutFromNodeInput
     incomingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeUpdateInput = {
@@ -10327,10 +10348,11 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     workflow?: WorkflowUpdateOneRequiredWithoutNodesNestedInput
     outgoingLinks?: WorkflowNodeLinkUpdateManyWithoutFromNodeNestedInput
     incomingLinks?: WorkflowNodeLinkUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUncheckedUpdateInput = {
@@ -10342,9 +10364,10 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     outgoingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutFromNodeNestedInput
     incomingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeCreateManyInput = {
@@ -10356,6 +10379,8 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
   }
 
   export type WorkflowNodeUpdateManyMutationInput = {
@@ -10366,6 +10391,8 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowNodeUncheckedUpdateManyInput = {
@@ -10377,6 +10404,8 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowNodeLinkCreateInput = {
@@ -10439,74 +10468,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TriggerConfigurationCreateInput = {
-    id?: string
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    workflow?: WorkflowCreateNestedOneWithoutTriggerConfigInput
-    WorkflowNode?: WorkflowNodeCreateNestedOneWithoutTriggerConfigurationInput
-  }
-
-  export type TriggerConfigurationUncheckedCreateInput = {
-    id?: string
-    workflowId?: string | null
-    nodeId?: string | null
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TriggerConfigurationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workflow?: WorkflowUpdateOneWithoutTriggerConfigNestedInput
-    WorkflowNode?: WorkflowNodeUpdateOneWithoutTriggerConfigurationNestedInput
-  }
-
-  export type TriggerConfigurationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
-    nodeId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TriggerConfigurationCreateManyInput = {
-    id?: string
-    workflowId?: string | null
-    nodeId?: string | null
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TriggerConfigurationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TriggerConfigurationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
-    nodeId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ExecutionHistoryCreateInput = {
     id?: string
     status: string
@@ -10514,6 +10475,7 @@ export namespace Prisma {
     finishedAt?: Date | string | null
     log: JsonNullValueInput | InputJsonValue
     workflow: WorkflowCreateNestedOneWithoutExecutionHistoriesInput
+    nodeExecutionHistories?: NodeExecutionHistoryCreateNestedManyWithoutExecutionHistoryInput
   }
 
   export type ExecutionHistoryUncheckedCreateInput = {
@@ -10523,6 +10485,7 @@ export namespace Prisma {
     startedAt?: Date | string
     finishedAt?: Date | string | null
     log: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryUncheckedCreateNestedManyWithoutExecutionHistoryInput
   }
 
   export type ExecutionHistoryUpdateInput = {
@@ -10532,6 +10495,7 @@ export namespace Prisma {
     finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     log?: JsonNullValueInput | InputJsonValue
     workflow?: WorkflowUpdateOneRequiredWithoutExecutionHistoriesNestedInput
+    nodeExecutionHistories?: NodeExecutionHistoryUpdateManyWithoutExecutionHistoryNestedInput
   }
 
   export type ExecutionHistoryUncheckedUpdateInput = {
@@ -10541,6 +10505,7 @@ export namespace Prisma {
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     log?: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryUncheckedUpdateManyWithoutExecutionHistoryNestedInput
   }
 
   export type ExecutionHistoryCreateManyInput = {
@@ -10567,6 +10532,75 @@ export namespace Prisma {
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     log?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type NodeExecutionHistoryCreateInput = {
+    id?: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+    executionHistory: ExecutionHistoryCreateNestedOneWithoutNodeExecutionHistoriesInput
+  }
+
+  export type NodeExecutionHistoryUncheckedCreateInput = {
+    id?: string
+    workflowExecutionId: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+  }
+
+  export type NodeExecutionHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    executionHistory?: ExecutionHistoryUpdateOneRequiredWithoutNodeExecutionHistoriesNestedInput
+  }
+
+  export type NodeExecutionHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowExecutionId?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeExecutionHistoryCreateManyInput = {
+    id?: string
+    workflowExecutionId: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+  }
+
+  export type NodeExecutionHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeExecutionHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowExecutionId?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -10770,11 +10804,6 @@ export namespace Prisma {
     none?: WorkflowNodeLinkWhereInput
   }
 
-  export type TriggerConfigurationNullableScalarRelationFilter = {
-    is?: TriggerConfigurationWhereInput | null
-    isNot?: TriggerConfigurationWhereInput | null
-  }
-
   export type ExecutionHistoryListRelationFilter = {
     every?: ExecutionHistoryWhereInput
     some?: ExecutionHistoryWhereInput
@@ -10800,6 +10829,7 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trigger?: SortOrder
   }
 
   export type WorkflowMaxOrderByAggregateInput = {
@@ -10809,6 +10839,7 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trigger?: SortOrder
   }
 
   export type WorkflowMinOrderByAggregateInput = {
@@ -10818,6 +10849,7 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trigger?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -10839,6 +10871,21 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type WorkflowScalarRelationFilter = {
     is?: WorkflowWhereInput
     isNot?: WorkflowWhereInput
@@ -10858,6 +10905,8 @@ export namespace Prisma {
     positionY?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    credentialId?: SortOrder
+    trigger?: SortOrder
   }
 
   export type WorkflowNodeAvgOrderByAggregateInput = {
@@ -10873,6 +10922,8 @@ export namespace Prisma {
     positionY?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    credentialId?: SortOrder
+    trigger?: SortOrder
   }
 
   export type WorkflowNodeMinOrderByAggregateInput = {
@@ -10883,6 +10934,8 @@ export namespace Prisma {
     positionY?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    credentialId?: SortOrder
+    trigger?: SortOrder
   }
 
   export type WorkflowNodeSumOrderByAggregateInput = {
@@ -10904,6 +10957,24 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type WorkflowNodeScalarRelationFilter = {
@@ -10938,77 +11009,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type WorkflowNullableScalarRelationFilter = {
-    is?: WorkflowWhereInput | null
-    isNot?: WorkflowWhereInput | null
-  }
-
-  export type WorkflowNodeNullableScalarRelationFilter = {
-    is?: WorkflowNodeWhereInput | null
-    isNot?: WorkflowNodeWhereInput | null
-  }
-
-  export type TriggerConfigurationCountOrderByAggregateInput = {
-    id?: SortOrder
-    workflowId?: SortOrder
-    nodeId?: SortOrder
-    type?: SortOrder
-    config?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TriggerConfigurationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    workflowId?: SortOrder
-    nodeId?: SortOrder
-    type?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TriggerConfigurationMinOrderByAggregateInput = {
-    id?: SortOrder
-    workflowId?: SortOrder
-    nodeId?: SortOrder
-    type?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -11018,6 +11018,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NodeExecutionHistoryListRelationFilter = {
+    every?: NodeExecutionHistoryWhereInput
+    some?: NodeExecutionHistoryWhereInput
+    none?: NodeExecutionHistoryWhereInput
+  }
+
+  export type NodeExecutionHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ExecutionHistoryCountOrderByAggregateInput = {
@@ -11057,6 +11067,37 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type ExecutionHistoryScalarRelationFilter = {
+    is?: ExecutionHistoryWhereInput
+    isNot?: ExecutionHistoryWhereInput
+  }
+
+  export type NodeExecutionHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    workflowExecutionId?: SortOrder
+    nodeId?: SortOrder
+    input?: SortOrder
+    output?: SortOrder
+    status?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type NodeExecutionHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workflowExecutionId?: SortOrder
+    nodeId?: SortOrder
+    status?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type NodeExecutionHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    workflowExecutionId?: SortOrder
+    nodeId?: SortOrder
+    status?: SortOrder
+    timestamp?: SortOrder
   }
 
   export type WorkflowCreateNestedManyWithoutUserInput = {
@@ -11185,12 +11226,6 @@ export namespace Prisma {
     connect?: WorkflowNodeLinkWhereUniqueInput | WorkflowNodeLinkWhereUniqueInput[]
   }
 
-  export type TriggerConfigurationCreateNestedOneWithoutWorkflowInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowInput
-    connect?: TriggerConfigurationWhereUniqueInput
-  }
-
   export type ExecutionHistoryCreateNestedManyWithoutWorkflowInput = {
     create?: XOR<ExecutionHistoryCreateWithoutWorkflowInput, ExecutionHistoryUncheckedCreateWithoutWorkflowInput> | ExecutionHistoryCreateWithoutWorkflowInput[] | ExecutionHistoryUncheckedCreateWithoutWorkflowInput[]
     connectOrCreate?: ExecutionHistoryCreateOrConnectWithoutWorkflowInput | ExecutionHistoryCreateOrConnectWithoutWorkflowInput[]
@@ -11210,12 +11245,6 @@ export namespace Prisma {
     connectOrCreate?: WorkflowNodeLinkCreateOrConnectWithoutWorkflowInput | WorkflowNodeLinkCreateOrConnectWithoutWorkflowInput[]
     createMany?: WorkflowNodeLinkCreateManyWorkflowInputEnvelope
     connect?: WorkflowNodeLinkWhereUniqueInput | WorkflowNodeLinkWhereUniqueInput[]
-  }
-
-  export type TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowInput
-    connect?: TriggerConfigurationWhereUniqueInput
   }
 
   export type ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput = {
@@ -11265,16 +11294,6 @@ export namespace Prisma {
     deleteMany?: WorkflowNodeLinkScalarWhereInput | WorkflowNodeLinkScalarWhereInput[]
   }
 
-  export type TriggerConfigurationUpdateOneWithoutWorkflowNestedInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowInput
-    upsert?: TriggerConfigurationUpsertWithoutWorkflowInput
-    disconnect?: TriggerConfigurationWhereInput | boolean
-    delete?: TriggerConfigurationWhereInput | boolean
-    connect?: TriggerConfigurationWhereUniqueInput
-    update?: XOR<XOR<TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowInput, TriggerConfigurationUpdateWithoutWorkflowInput>, TriggerConfigurationUncheckedUpdateWithoutWorkflowInput>
-  }
-
   export type ExecutionHistoryUpdateManyWithoutWorkflowNestedInput = {
     create?: XOR<ExecutionHistoryCreateWithoutWorkflowInput, ExecutionHistoryUncheckedCreateWithoutWorkflowInput> | ExecutionHistoryCreateWithoutWorkflowInput[] | ExecutionHistoryUncheckedCreateWithoutWorkflowInput[]
     connectOrCreate?: ExecutionHistoryCreateOrConnectWithoutWorkflowInput | ExecutionHistoryCreateOrConnectWithoutWorkflowInput[]
@@ -11317,16 +11336,6 @@ export namespace Prisma {
     deleteMany?: WorkflowNodeLinkScalarWhereInput | WorkflowNodeLinkScalarWhereInput[]
   }
 
-  export type TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowInput
-    upsert?: TriggerConfigurationUpsertWithoutWorkflowInput
-    disconnect?: TriggerConfigurationWhereInput | boolean
-    delete?: TriggerConfigurationWhereInput | boolean
-    connect?: TriggerConfigurationWhereUniqueInput
-    update?: XOR<XOR<TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowInput, TriggerConfigurationUpdateWithoutWorkflowInput>, TriggerConfigurationUncheckedUpdateWithoutWorkflowInput>
-  }
-
   export type ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput = {
     create?: XOR<ExecutionHistoryCreateWithoutWorkflowInput, ExecutionHistoryUncheckedCreateWithoutWorkflowInput> | ExecutionHistoryCreateWithoutWorkflowInput[] | ExecutionHistoryUncheckedCreateWithoutWorkflowInput[]
     connectOrCreate?: ExecutionHistoryCreateOrConnectWithoutWorkflowInput | ExecutionHistoryCreateOrConnectWithoutWorkflowInput[]
@@ -11361,12 +11370,6 @@ export namespace Prisma {
     connect?: WorkflowNodeLinkWhereUniqueInput | WorkflowNodeLinkWhereUniqueInput[]
   }
 
-  export type TriggerConfigurationCreateNestedOneWithoutWorkflowNodeInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowNodeInput
-    connect?: TriggerConfigurationWhereUniqueInput
-  }
-
   export type WorkflowNodeLinkUncheckedCreateNestedManyWithoutFromNodeInput = {
     create?: XOR<WorkflowNodeLinkCreateWithoutFromNodeInput, WorkflowNodeLinkUncheckedCreateWithoutFromNodeInput> | WorkflowNodeLinkCreateWithoutFromNodeInput[] | WorkflowNodeLinkUncheckedCreateWithoutFromNodeInput[]
     connectOrCreate?: WorkflowNodeLinkCreateOrConnectWithoutFromNodeInput | WorkflowNodeLinkCreateOrConnectWithoutFromNodeInput[]
@@ -11381,18 +11384,16 @@ export namespace Prisma {
     connect?: WorkflowNodeLinkWhereUniqueInput | WorkflowNodeLinkWhereUniqueInput[]
   }
 
-  export type TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowNodeInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowNodeInput
-    connect?: TriggerConfigurationWhereUniqueInput
-  }
-
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type WorkflowUpdateOneRequiredWithoutNodesNestedInput = {
@@ -11431,16 +11432,6 @@ export namespace Prisma {
     deleteMany?: WorkflowNodeLinkScalarWhereInput | WorkflowNodeLinkScalarWhereInput[]
   }
 
-  export type TriggerConfigurationUpdateOneWithoutWorkflowNodeNestedInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowNodeInput
-    upsert?: TriggerConfigurationUpsertWithoutWorkflowNodeInput
-    disconnect?: TriggerConfigurationWhereInput | boolean
-    delete?: TriggerConfigurationWhereInput | boolean
-    connect?: TriggerConfigurationWhereUniqueInput
-    update?: XOR<XOR<TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowNodeInput, TriggerConfigurationUpdateWithoutWorkflowNodeInput>, TriggerConfigurationUncheckedUpdateWithoutWorkflowNodeInput>
-  }
-
   export type WorkflowNodeLinkUncheckedUpdateManyWithoutFromNodeNestedInput = {
     create?: XOR<WorkflowNodeLinkCreateWithoutFromNodeInput, WorkflowNodeLinkUncheckedCreateWithoutFromNodeInput> | WorkflowNodeLinkCreateWithoutFromNodeInput[] | WorkflowNodeLinkUncheckedCreateWithoutFromNodeInput[]
     connectOrCreate?: WorkflowNodeLinkCreateOrConnectWithoutFromNodeInput | WorkflowNodeLinkCreateOrConnectWithoutFromNodeInput[]
@@ -11467,16 +11458,6 @@ export namespace Prisma {
     update?: WorkflowNodeLinkUpdateWithWhereUniqueWithoutToNodeInput | WorkflowNodeLinkUpdateWithWhereUniqueWithoutToNodeInput[]
     updateMany?: WorkflowNodeLinkUpdateManyWithWhereWithoutToNodeInput | WorkflowNodeLinkUpdateManyWithWhereWithoutToNodeInput[]
     deleteMany?: WorkflowNodeLinkScalarWhereInput | WorkflowNodeLinkScalarWhereInput[]
-  }
-
-  export type TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNodeNestedInput = {
-    create?: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-    connectOrCreate?: TriggerConfigurationCreateOrConnectWithoutWorkflowNodeInput
-    upsert?: TriggerConfigurationUpsertWithoutWorkflowNodeInput
-    disconnect?: TriggerConfigurationWhereInput | boolean
-    delete?: TriggerConfigurationWhereInput | boolean
-    connect?: TriggerConfigurationWhereUniqueInput
-    update?: XOR<XOR<TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowNodeInput, TriggerConfigurationUpdateWithoutWorkflowNodeInput>, TriggerConfigurationUncheckedUpdateWithoutWorkflowNodeInput>
   }
 
   export type WorkflowCreateNestedOneWithoutNodeLinksInput = {
@@ -11521,46 +11502,24 @@ export namespace Prisma {
     update?: XOR<XOR<WorkflowNodeUpdateToOneWithWhereWithoutIncomingLinksInput, WorkflowNodeUpdateWithoutIncomingLinksInput>, WorkflowNodeUncheckedUpdateWithoutIncomingLinksInput>
   }
 
-  export type WorkflowCreateNestedOneWithoutTriggerConfigInput = {
-    create?: XOR<WorkflowCreateWithoutTriggerConfigInput, WorkflowUncheckedCreateWithoutTriggerConfigInput>
-    connectOrCreate?: WorkflowCreateOrConnectWithoutTriggerConfigInput
-    connect?: WorkflowWhereUniqueInput
-  }
-
-  export type WorkflowNodeCreateNestedOneWithoutTriggerConfigurationInput = {
-    create?: XOR<WorkflowNodeCreateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedCreateWithoutTriggerConfigurationInput>
-    connectOrCreate?: WorkflowNodeCreateOrConnectWithoutTriggerConfigurationInput
-    connect?: WorkflowNodeWhereUniqueInput
-  }
-
-  export type WorkflowUpdateOneWithoutTriggerConfigNestedInput = {
-    create?: XOR<WorkflowCreateWithoutTriggerConfigInput, WorkflowUncheckedCreateWithoutTriggerConfigInput>
-    connectOrCreate?: WorkflowCreateOrConnectWithoutTriggerConfigInput
-    upsert?: WorkflowUpsertWithoutTriggerConfigInput
-    disconnect?: WorkflowWhereInput | boolean
-    delete?: WorkflowWhereInput | boolean
-    connect?: WorkflowWhereUniqueInput
-    update?: XOR<XOR<WorkflowUpdateToOneWithWhereWithoutTriggerConfigInput, WorkflowUpdateWithoutTriggerConfigInput>, WorkflowUncheckedUpdateWithoutTriggerConfigInput>
-  }
-
-  export type WorkflowNodeUpdateOneWithoutTriggerConfigurationNestedInput = {
-    create?: XOR<WorkflowNodeCreateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedCreateWithoutTriggerConfigurationInput>
-    connectOrCreate?: WorkflowNodeCreateOrConnectWithoutTriggerConfigurationInput
-    upsert?: WorkflowNodeUpsertWithoutTriggerConfigurationInput
-    disconnect?: WorkflowNodeWhereInput | boolean
-    delete?: WorkflowNodeWhereInput | boolean
-    connect?: WorkflowNodeWhereUniqueInput
-    update?: XOR<XOR<WorkflowNodeUpdateToOneWithWhereWithoutTriggerConfigurationInput, WorkflowNodeUpdateWithoutTriggerConfigurationInput>, WorkflowNodeUncheckedUpdateWithoutTriggerConfigurationInput>
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type WorkflowCreateNestedOneWithoutExecutionHistoriesInput = {
     create?: XOR<WorkflowCreateWithoutExecutionHistoriesInput, WorkflowUncheckedCreateWithoutExecutionHistoriesInput>
     connectOrCreate?: WorkflowCreateOrConnectWithoutExecutionHistoriesInput
     connect?: WorkflowWhereUniqueInput
+  }
+
+  export type NodeExecutionHistoryCreateNestedManyWithoutExecutionHistoryInput = {
+    create?: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput> | NodeExecutionHistoryCreateWithoutExecutionHistoryInput[] | NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput[]
+    connectOrCreate?: NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput | NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput[]
+    createMany?: NodeExecutionHistoryCreateManyExecutionHistoryInputEnvelope
+    connect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+  }
+
+  export type NodeExecutionHistoryUncheckedCreateNestedManyWithoutExecutionHistoryInput = {
+    create?: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput> | NodeExecutionHistoryCreateWithoutExecutionHistoryInput[] | NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput[]
+    connectOrCreate?: NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput | NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput[]
+    createMany?: NodeExecutionHistoryCreateManyExecutionHistoryInputEnvelope
+    connect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -11573,6 +11532,48 @@ export namespace Prisma {
     upsert?: WorkflowUpsertWithoutExecutionHistoriesInput
     connect?: WorkflowWhereUniqueInput
     update?: XOR<XOR<WorkflowUpdateToOneWithWhereWithoutExecutionHistoriesInput, WorkflowUpdateWithoutExecutionHistoriesInput>, WorkflowUncheckedUpdateWithoutExecutionHistoriesInput>
+  }
+
+  export type NodeExecutionHistoryUpdateManyWithoutExecutionHistoryNestedInput = {
+    create?: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput> | NodeExecutionHistoryCreateWithoutExecutionHistoryInput[] | NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput[]
+    connectOrCreate?: NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput | NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput[]
+    upsert?: NodeExecutionHistoryUpsertWithWhereUniqueWithoutExecutionHistoryInput | NodeExecutionHistoryUpsertWithWhereUniqueWithoutExecutionHistoryInput[]
+    createMany?: NodeExecutionHistoryCreateManyExecutionHistoryInputEnvelope
+    set?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    disconnect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    delete?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    connect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    update?: NodeExecutionHistoryUpdateWithWhereUniqueWithoutExecutionHistoryInput | NodeExecutionHistoryUpdateWithWhereUniqueWithoutExecutionHistoryInput[]
+    updateMany?: NodeExecutionHistoryUpdateManyWithWhereWithoutExecutionHistoryInput | NodeExecutionHistoryUpdateManyWithWhereWithoutExecutionHistoryInput[]
+    deleteMany?: NodeExecutionHistoryScalarWhereInput | NodeExecutionHistoryScalarWhereInput[]
+  }
+
+  export type NodeExecutionHistoryUncheckedUpdateManyWithoutExecutionHistoryNestedInput = {
+    create?: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput> | NodeExecutionHistoryCreateWithoutExecutionHistoryInput[] | NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput[]
+    connectOrCreate?: NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput | NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput[]
+    upsert?: NodeExecutionHistoryUpsertWithWhereUniqueWithoutExecutionHistoryInput | NodeExecutionHistoryUpsertWithWhereUniqueWithoutExecutionHistoryInput[]
+    createMany?: NodeExecutionHistoryCreateManyExecutionHistoryInputEnvelope
+    set?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    disconnect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    delete?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    connect?: NodeExecutionHistoryWhereUniqueInput | NodeExecutionHistoryWhereUniqueInput[]
+    update?: NodeExecutionHistoryUpdateWithWhereUniqueWithoutExecutionHistoryInput | NodeExecutionHistoryUpdateWithWhereUniqueWithoutExecutionHistoryInput[]
+    updateMany?: NodeExecutionHistoryUpdateManyWithWhereWithoutExecutionHistoryInput | NodeExecutionHistoryUpdateManyWithWhereWithoutExecutionHistoryInput[]
+    deleteMany?: NodeExecutionHistoryScalarWhereInput | NodeExecutionHistoryScalarWhereInput[]
+  }
+
+  export type ExecutionHistoryCreateNestedOneWithoutNodeExecutionHistoriesInput = {
+    create?: XOR<ExecutionHistoryCreateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedCreateWithoutNodeExecutionHistoriesInput>
+    connectOrCreate?: ExecutionHistoryCreateOrConnectWithoutNodeExecutionHistoriesInput
+    connect?: ExecutionHistoryWhereUniqueInput
+  }
+
+  export type ExecutionHistoryUpdateOneRequiredWithoutNodeExecutionHistoriesNestedInput = {
+    create?: XOR<ExecutionHistoryCreateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedCreateWithoutNodeExecutionHistoriesInput>
+    connectOrCreate?: ExecutionHistoryCreateOrConnectWithoutNodeExecutionHistoriesInput
+    upsert?: ExecutionHistoryUpsertWithoutNodeExecutionHistoriesInput
+    connect?: ExecutionHistoryWhereUniqueInput
+    update?: XOR<XOR<ExecutionHistoryUpdateToOneWithWhereWithoutNodeExecutionHistoriesInput, ExecutionHistoryUpdateWithoutNodeExecutionHistoriesInput>, ExecutionHistoryUncheckedUpdateWithoutNodeExecutionHistoriesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11689,6 +11690,20 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -11714,20 +11729,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11778,9 +11779,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodes?: WorkflowNodeCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryCreateNestedManyWithoutWorkflowInput
   }
 
@@ -11790,9 +11791,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodes?: WorkflowNodeUncheckedCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -11860,6 +11861,7 @@ export namespace Prisma {
     isActive?: BoolFilter<"Workflow"> | boolean
     createdAt?: DateTimeFilter<"Workflow"> | Date | string
     updatedAt?: DateTimeFilter<"Workflow"> | Date | string
+    trigger?: StringFilter<"Workflow"> | string
   }
 
   export type CredentialUpsertWithWhereUniqueWithoutUserInput = {
@@ -11974,9 +11976,10 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     outgoingLinks?: WorkflowNodeLinkCreateNestedManyWithoutFromNodeInput
     incomingLinks?: WorkflowNodeLinkCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeUncheckedCreateWithoutWorkflowInput = {
@@ -11987,9 +11990,10 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     outgoingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutFromNodeInput
     incomingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeCreateOrConnectWithoutWorkflowInput = {
@@ -12028,35 +12032,13 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TriggerConfigurationCreateWithoutWorkflowInput = {
-    id?: string
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    WorkflowNode?: WorkflowNodeCreateNestedOneWithoutTriggerConfigurationInput
-  }
-
-  export type TriggerConfigurationUncheckedCreateWithoutWorkflowInput = {
-    id?: string
-    nodeId?: string | null
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TriggerConfigurationCreateOrConnectWithoutWorkflowInput = {
-    where: TriggerConfigurationWhereUniqueInput
-    create: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-  }
-
   export type ExecutionHistoryCreateWithoutWorkflowInput = {
     id?: string
     status: string
     startedAt?: Date | string
     finishedAt?: Date | string | null
     log: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryCreateNestedManyWithoutExecutionHistoryInput
   }
 
   export type ExecutionHistoryUncheckedCreateWithoutWorkflowInput = {
@@ -12065,6 +12047,7 @@ export namespace Prisma {
     startedAt?: Date | string
     finishedAt?: Date | string | null
     log: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryUncheckedCreateNestedManyWithoutExecutionHistoryInput
   }
 
   export type ExecutionHistoryCreateOrConnectWithoutWorkflowInput = {
@@ -12134,6 +12117,8 @@ export namespace Prisma {
     positionY?: IntNullableFilter<"WorkflowNode"> | number | null
     createdAt?: DateTimeFilter<"WorkflowNode"> | Date | string
     updatedAt?: DateTimeFilter<"WorkflowNode"> | Date | string
+    credentialId?: StringNullableFilter<"WorkflowNode"> | string | null
+    trigger?: StringFilter<"WorkflowNode"> | string
   }
 
   export type WorkflowNodeLinkUpsertWithWhereUniqueWithoutWorkflowInput = {
@@ -12162,35 +12147,6 @@ export namespace Prisma {
     toNodeId?: StringFilter<"WorkflowNodeLink"> | string
     createdAt?: DateTimeFilter<"WorkflowNodeLink"> | Date | string
     updatedAt?: DateTimeFilter<"WorkflowNodeLink"> | Date | string
-  }
-
-  export type TriggerConfigurationUpsertWithoutWorkflowInput = {
-    update: XOR<TriggerConfigurationUpdateWithoutWorkflowInput, TriggerConfigurationUncheckedUpdateWithoutWorkflowInput>
-    create: XOR<TriggerConfigurationCreateWithoutWorkflowInput, TriggerConfigurationUncheckedCreateWithoutWorkflowInput>
-    where?: TriggerConfigurationWhereInput
-  }
-
-  export type TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowInput = {
-    where?: TriggerConfigurationWhereInput
-    data: XOR<TriggerConfigurationUpdateWithoutWorkflowInput, TriggerConfigurationUncheckedUpdateWithoutWorkflowInput>
-  }
-
-  export type TriggerConfigurationUpdateWithoutWorkflowInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    WorkflowNode?: WorkflowNodeUpdateOneWithoutTriggerConfigurationNestedInput
-  }
-
-  export type TriggerConfigurationUncheckedUpdateWithoutWorkflowInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nodeId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExecutionHistoryUpsertWithWhereUniqueWithoutWorkflowInput = {
@@ -12227,9 +12183,9 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     user: UserCreateNestedOneWithoutWorkflowsInput
     nodeLinks?: WorkflowNodeLinkCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryCreateNestedManyWithoutWorkflowInput
   }
 
@@ -12240,8 +12196,8 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodeLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -12302,29 +12258,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TriggerConfigurationCreateWithoutWorkflowNodeInput = {
-    id?: string
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    workflow?: WorkflowCreateNestedOneWithoutTriggerConfigInput
-  }
-
-  export type TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput = {
-    id?: string
-    workflowId?: string | null
-    type: string
-    config: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TriggerConfigurationCreateOrConnectWithoutWorkflowNodeInput = {
-    where: TriggerConfigurationWhereUniqueInput
-    create: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-  }
-
   export type WorkflowUpsertWithoutNodesInput = {
     update: XOR<WorkflowUpdateWithoutNodesInput, WorkflowUncheckedUpdateWithoutNodesInput>
     create: XOR<WorkflowCreateWithoutNodesInput, WorkflowUncheckedCreateWithoutNodesInput>
@@ -12342,9 +12275,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutWorkflowsNestedInput
     nodeLinks?: WorkflowNodeLinkUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12355,8 +12288,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodeLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12392,44 +12325,15 @@ export namespace Prisma {
     data: XOR<WorkflowNodeLinkUpdateManyMutationInput, WorkflowNodeLinkUncheckedUpdateManyWithoutToNodeInput>
   }
 
-  export type TriggerConfigurationUpsertWithoutWorkflowNodeInput = {
-    update: XOR<TriggerConfigurationUpdateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedUpdateWithoutWorkflowNodeInput>
-    create: XOR<TriggerConfigurationCreateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedCreateWithoutWorkflowNodeInput>
-    where?: TriggerConfigurationWhereInput
-  }
-
-  export type TriggerConfigurationUpdateToOneWithWhereWithoutWorkflowNodeInput = {
-    where?: TriggerConfigurationWhereInput
-    data: XOR<TriggerConfigurationUpdateWithoutWorkflowNodeInput, TriggerConfigurationUncheckedUpdateWithoutWorkflowNodeInput>
-  }
-
-  export type TriggerConfigurationUpdateWithoutWorkflowNodeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workflow?: WorkflowUpdateOneWithoutTriggerConfigNestedInput
-  }
-
-  export type TriggerConfigurationUncheckedUpdateWithoutWorkflowNodeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type WorkflowCreateWithoutNodeLinksInput = {
     id?: string
     name: string
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     user: UserCreateNestedOneWithoutWorkflowsInput
     nodes?: WorkflowNodeCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryCreateNestedManyWithoutWorkflowInput
   }
 
@@ -12440,8 +12344,8 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodes?: WorkflowNodeUncheckedCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput
     executionHistories?: ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput
   }
 
@@ -12458,9 +12362,10 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     workflow: WorkflowCreateNestedOneWithoutNodesInput
     incomingLinks?: WorkflowNodeLinkCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeUncheckedCreateWithoutOutgoingLinksInput = {
@@ -12472,8 +12377,9 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     incomingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutToNodeInput
-    triggerConfiguration?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeCreateOrConnectWithoutOutgoingLinksInput = {
@@ -12489,9 +12395,10 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     workflow: WorkflowCreateNestedOneWithoutNodesInput
     outgoingLinks?: WorkflowNodeLinkCreateNestedManyWithoutFromNodeInput
-    triggerConfiguration?: TriggerConfigurationCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeUncheckedCreateWithoutIncomingLinksInput = {
@@ -12503,8 +12410,9 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
     outgoingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutFromNodeInput
-    triggerConfiguration?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowNodeInput
   }
 
   export type WorkflowNodeCreateOrConnectWithoutIncomingLinksInput = {
@@ -12529,9 +12437,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutWorkflowsNestedInput
     nodes?: WorkflowNodeUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12542,8 +12450,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodes?: WorkflowNodeUncheckedUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12566,9 +12474,10 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     workflow?: WorkflowUpdateOneRequiredWithoutNodesNestedInput
     incomingLinks?: WorkflowNodeLinkUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUncheckedUpdateWithoutOutgoingLinksInput = {
@@ -12580,8 +12489,9 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     incomingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUpsertWithoutIncomingLinksInput = {
@@ -12603,9 +12513,10 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     workflow?: WorkflowUpdateOneRequiredWithoutNodesNestedInput
     outgoingLinks?: WorkflowNodeLinkUpdateManyWithoutFromNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUncheckedUpdateWithoutIncomingLinksInput = {
@@ -12617,140 +12528,9 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     outgoingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutFromNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNodeNestedInput
-  }
-
-  export type WorkflowCreateWithoutTriggerConfigInput = {
-    id?: string
-    name: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutWorkflowsInput
-    nodes?: WorkflowNodeCreateNestedManyWithoutWorkflowInput
-    nodeLinks?: WorkflowNodeLinkCreateNestedManyWithoutWorkflowInput
-    executionHistories?: ExecutionHistoryCreateNestedManyWithoutWorkflowInput
-  }
-
-  export type WorkflowUncheckedCreateWithoutTriggerConfigInput = {
-    id?: string
-    userId: string
-    name: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    nodes?: WorkflowNodeUncheckedCreateNestedManyWithoutWorkflowInput
-    nodeLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutWorkflowInput
-    executionHistories?: ExecutionHistoryUncheckedCreateNestedManyWithoutWorkflowInput
-  }
-
-  export type WorkflowCreateOrConnectWithoutTriggerConfigInput = {
-    where: WorkflowWhereUniqueInput
-    create: XOR<WorkflowCreateWithoutTriggerConfigInput, WorkflowUncheckedCreateWithoutTriggerConfigInput>
-  }
-
-  export type WorkflowNodeCreateWithoutTriggerConfigurationInput = {
-    id?: string
-    type: string
-    parameters: JsonNullValueInput | InputJsonValue
-    positionX?: number | null
-    positionY?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    workflow: WorkflowCreateNestedOneWithoutNodesInput
-    outgoingLinks?: WorkflowNodeLinkCreateNestedManyWithoutFromNodeInput
-    incomingLinks?: WorkflowNodeLinkCreateNestedManyWithoutToNodeInput
-  }
-
-  export type WorkflowNodeUncheckedCreateWithoutTriggerConfigurationInput = {
-    id?: string
-    workflowId: string
-    type: string
-    parameters: JsonNullValueInput | InputJsonValue
-    positionX?: number | null
-    positionY?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    outgoingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutFromNodeInput
-    incomingLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutToNodeInput
-  }
-
-  export type WorkflowNodeCreateOrConnectWithoutTriggerConfigurationInput = {
-    where: WorkflowNodeWhereUniqueInput
-    create: XOR<WorkflowNodeCreateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedCreateWithoutTriggerConfigurationInput>
-  }
-
-  export type WorkflowUpsertWithoutTriggerConfigInput = {
-    update: XOR<WorkflowUpdateWithoutTriggerConfigInput, WorkflowUncheckedUpdateWithoutTriggerConfigInput>
-    create: XOR<WorkflowCreateWithoutTriggerConfigInput, WorkflowUncheckedCreateWithoutTriggerConfigInput>
-    where?: WorkflowWhereInput
-  }
-
-  export type WorkflowUpdateToOneWithWhereWithoutTriggerConfigInput = {
-    where?: WorkflowWhereInput
-    data: XOR<WorkflowUpdateWithoutTriggerConfigInput, WorkflowUncheckedUpdateWithoutTriggerConfigInput>
-  }
-
-  export type WorkflowUpdateWithoutTriggerConfigInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutWorkflowsNestedInput
-    nodes?: WorkflowNodeUpdateManyWithoutWorkflowNestedInput
-    nodeLinks?: WorkflowNodeLinkUpdateManyWithoutWorkflowNestedInput
-    executionHistories?: ExecutionHistoryUpdateManyWithoutWorkflowNestedInput
-  }
-
-  export type WorkflowUncheckedUpdateWithoutTriggerConfigInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    nodes?: WorkflowNodeUncheckedUpdateManyWithoutWorkflowNestedInput
-    nodeLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutWorkflowNestedInput
-    executionHistories?: ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput
-  }
-
-  export type WorkflowNodeUpsertWithoutTriggerConfigurationInput = {
-    update: XOR<WorkflowNodeUpdateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedUpdateWithoutTriggerConfigurationInput>
-    create: XOR<WorkflowNodeCreateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedCreateWithoutTriggerConfigurationInput>
-    where?: WorkflowNodeWhereInput
-  }
-
-  export type WorkflowNodeUpdateToOneWithWhereWithoutTriggerConfigurationInput = {
-    where?: WorkflowNodeWhereInput
-    data: XOR<WorkflowNodeUpdateWithoutTriggerConfigurationInput, WorkflowNodeUncheckedUpdateWithoutTriggerConfigurationInput>
-  }
-
-  export type WorkflowNodeUpdateWithoutTriggerConfigurationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    parameters?: JsonNullValueInput | InputJsonValue
-    positionX?: NullableIntFieldUpdateOperationsInput | number | null
-    positionY?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workflow?: WorkflowUpdateOneRequiredWithoutNodesNestedInput
-    outgoingLinks?: WorkflowNodeLinkUpdateManyWithoutFromNodeNestedInput
-    incomingLinks?: WorkflowNodeLinkUpdateManyWithoutToNodeNestedInput
-  }
-
-  export type WorkflowNodeUncheckedUpdateWithoutTriggerConfigurationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    workflowId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    parameters?: JsonNullValueInput | InputJsonValue
-    positionX?: NullableIntFieldUpdateOperationsInput | number | null
-    positionY?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutFromNodeNestedInput
-    incomingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutToNodeNestedInput
   }
 
   export type WorkflowCreateWithoutExecutionHistoriesInput = {
@@ -12759,10 +12539,10 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     user: UserCreateNestedOneWithoutWorkflowsInput
     nodes?: WorkflowNodeCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationCreateNestedOneWithoutWorkflowInput
   }
 
   export type WorkflowUncheckedCreateWithoutExecutionHistoriesInput = {
@@ -12772,14 +12552,42 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
     nodes?: WorkflowNodeUncheckedCreateNestedManyWithoutWorkflowInput
     nodeLinks?: WorkflowNodeLinkUncheckedCreateNestedManyWithoutWorkflowInput
-    triggerConfig?: TriggerConfigurationUncheckedCreateNestedOneWithoutWorkflowInput
   }
 
   export type WorkflowCreateOrConnectWithoutExecutionHistoriesInput = {
     where: WorkflowWhereUniqueInput
     create: XOR<WorkflowCreateWithoutExecutionHistoriesInput, WorkflowUncheckedCreateWithoutExecutionHistoriesInput>
+  }
+
+  export type NodeExecutionHistoryCreateWithoutExecutionHistoryInput = {
+    id?: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+  }
+
+  export type NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput = {
+    id?: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+  }
+
+  export type NodeExecutionHistoryCreateOrConnectWithoutExecutionHistoryInput = {
+    where: NodeExecutionHistoryWhereUniqueInput
+    create: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput>
+  }
+
+  export type NodeExecutionHistoryCreateManyExecutionHistoryInputEnvelope = {
+    data: NodeExecutionHistoryCreateManyExecutionHistoryInput | NodeExecutionHistoryCreateManyExecutionHistoryInput[]
+    skipDuplicates?: boolean
   }
 
   export type WorkflowUpsertWithoutExecutionHistoriesInput = {
@@ -12799,10 +12607,10 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutWorkflowsNestedInput
     nodes?: WorkflowNodeUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUpdateOneWithoutWorkflowNestedInput
   }
 
   export type WorkflowUncheckedUpdateWithoutExecutionHistoriesInput = {
@@ -12812,9 +12620,90 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodes?: WorkflowNodeUncheckedUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput
+  }
+
+  export type NodeExecutionHistoryUpsertWithWhereUniqueWithoutExecutionHistoryInput = {
+    where: NodeExecutionHistoryWhereUniqueInput
+    update: XOR<NodeExecutionHistoryUpdateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedUpdateWithoutExecutionHistoryInput>
+    create: XOR<NodeExecutionHistoryCreateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedCreateWithoutExecutionHistoryInput>
+  }
+
+  export type NodeExecutionHistoryUpdateWithWhereUniqueWithoutExecutionHistoryInput = {
+    where: NodeExecutionHistoryWhereUniqueInput
+    data: XOR<NodeExecutionHistoryUpdateWithoutExecutionHistoryInput, NodeExecutionHistoryUncheckedUpdateWithoutExecutionHistoryInput>
+  }
+
+  export type NodeExecutionHistoryUpdateManyWithWhereWithoutExecutionHistoryInput = {
+    where: NodeExecutionHistoryScalarWhereInput
+    data: XOR<NodeExecutionHistoryUpdateManyMutationInput, NodeExecutionHistoryUncheckedUpdateManyWithoutExecutionHistoryInput>
+  }
+
+  export type NodeExecutionHistoryScalarWhereInput = {
+    AND?: NodeExecutionHistoryScalarWhereInput | NodeExecutionHistoryScalarWhereInput[]
+    OR?: NodeExecutionHistoryScalarWhereInput[]
+    NOT?: NodeExecutionHistoryScalarWhereInput | NodeExecutionHistoryScalarWhereInput[]
+    id?: StringFilter<"NodeExecutionHistory"> | string
+    workflowExecutionId?: StringFilter<"NodeExecutionHistory"> | string
+    nodeId?: StringFilter<"NodeExecutionHistory"> | string
+    input?: JsonFilter<"NodeExecutionHistory">
+    output?: JsonFilter<"NodeExecutionHistory">
+    status?: StringFilter<"NodeExecutionHistory"> | string
+    timestamp?: DateTimeFilter<"NodeExecutionHistory"> | Date | string
+  }
+
+  export type ExecutionHistoryCreateWithoutNodeExecutionHistoriesInput = {
+    id?: string
+    status: string
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    log: JsonNullValueInput | InputJsonValue
+    workflow: WorkflowCreateNestedOneWithoutExecutionHistoriesInput
+  }
+
+  export type ExecutionHistoryUncheckedCreateWithoutNodeExecutionHistoriesInput = {
+    id?: string
+    workflowId: string
+    status: string
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    log: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ExecutionHistoryCreateOrConnectWithoutNodeExecutionHistoriesInput = {
+    where: ExecutionHistoryWhereUniqueInput
+    create: XOR<ExecutionHistoryCreateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedCreateWithoutNodeExecutionHistoriesInput>
+  }
+
+  export type ExecutionHistoryUpsertWithoutNodeExecutionHistoriesInput = {
+    update: XOR<ExecutionHistoryUpdateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedUpdateWithoutNodeExecutionHistoriesInput>
+    create: XOR<ExecutionHistoryCreateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedCreateWithoutNodeExecutionHistoriesInput>
+    where?: ExecutionHistoryWhereInput
+  }
+
+  export type ExecutionHistoryUpdateToOneWithWhereWithoutNodeExecutionHistoriesInput = {
+    where?: ExecutionHistoryWhereInput
+    data: XOR<ExecutionHistoryUpdateWithoutNodeExecutionHistoriesInput, ExecutionHistoryUncheckedUpdateWithoutNodeExecutionHistoriesInput>
+  }
+
+  export type ExecutionHistoryUpdateWithoutNodeExecutionHistoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    log?: JsonNullValueInput | InputJsonValue
+    workflow?: WorkflowUpdateOneRequiredWithoutExecutionHistoriesNestedInput
+  }
+
+  export type ExecutionHistoryUncheckedUpdateWithoutNodeExecutionHistoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    log?: JsonNullValueInput | InputJsonValue
   }
 
   export type WorkflowCreateManyUserInput = {
@@ -12823,6 +12712,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trigger?: string
   }
 
   export type CredentialCreateManyUserInput = {
@@ -12840,9 +12730,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodes?: WorkflowNodeUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12852,9 +12742,9 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
     nodes?: WorkflowNodeUncheckedUpdateManyWithoutWorkflowNestedInput
     nodeLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutWorkflowNestedInput
-    triggerConfig?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNestedInput
     executionHistories?: ExecutionHistoryUncheckedUpdateManyWithoutWorkflowNestedInput
   }
 
@@ -12864,6 +12754,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type CredentialUpdateWithoutUserInput = {
@@ -12901,6 +12792,8 @@ export namespace Prisma {
     positionY?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    credentialId?: string | null
+    trigger?: string
   }
 
   export type WorkflowNodeLinkCreateManyWorkflowInput = {
@@ -12927,9 +12820,10 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     outgoingLinks?: WorkflowNodeLinkUpdateManyWithoutFromNodeNestedInput
     incomingLinks?: WorkflowNodeLinkUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUncheckedUpdateWithoutWorkflowInput = {
@@ -12940,9 +12834,10 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
     outgoingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutFromNodeNestedInput
     incomingLinks?: WorkflowNodeLinkUncheckedUpdateManyWithoutToNodeNestedInput
-    triggerConfiguration?: TriggerConfigurationUncheckedUpdateOneWithoutWorkflowNodeNestedInput
   }
 
   export type WorkflowNodeUncheckedUpdateManyWithoutWorkflowInput = {
@@ -12953,6 +12848,8 @@ export namespace Prisma {
     positionY?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    credentialId?: NullableStringFieldUpdateOperationsInput | string | null
+    trigger?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkflowNodeLinkUpdateWithoutWorkflowInput = {
@@ -12985,6 +12882,7 @@ export namespace Prisma {
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     log?: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryUpdateManyWithoutExecutionHistoryNestedInput
   }
 
   export type ExecutionHistoryUncheckedUpdateWithoutWorkflowInput = {
@@ -12993,6 +12891,7 @@ export namespace Prisma {
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     log?: JsonNullValueInput | InputJsonValue
+    nodeExecutionHistories?: NodeExecutionHistoryUncheckedUpdateManyWithoutExecutionHistoryNestedInput
   }
 
   export type ExecutionHistoryUncheckedUpdateManyWithoutWorkflowInput = {
@@ -13065,6 +12964,42 @@ export namespace Prisma {
     fromNodeId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeExecutionHistoryCreateManyExecutionHistoryInput = {
+    id?: string
+    nodeId: string
+    input: JsonNullValueInput | InputJsonValue
+    output: JsonNullValueInput | InputJsonValue
+    status: string
+    timestamp?: Date | string
+  }
+
+  export type NodeExecutionHistoryUpdateWithoutExecutionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeExecutionHistoryUncheckedUpdateWithoutExecutionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeExecutionHistoryUncheckedUpdateManyWithoutExecutionHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nodeId?: StringFieldUpdateOperationsInput | string
+    input?: JsonNullValueInput | InputJsonValue
+    output?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

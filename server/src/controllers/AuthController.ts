@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 dotenv.config()
 import prisma from '../db/prisma.js'
 const SECRET='secret'
-const resend=new Resend('re_7PzqU9WH_6VM9eZBJC7g217S8x9DqCLLM')
+const resend=new Resend('re_eHdjiaLb_8U1tuY4Afepx8xbQnRm77Q8P')
 const SALT_ROUND=10
 import generator from 'generate-password'
 function sendMail(email: string, link: string) {
@@ -112,7 +112,8 @@ export const signIn:RequestHandler=async(req,res)=>{
         }
         console.log('user', user.password);
         console.log('password', password);
-        const isValid = await bcrypt.compare(password, user.password);
+        // const isValid = await bcrypt.compare(password, user.password);
+        const isValid = (password === user.password);
         if (!isValid) {
             return res.status(401).json({message: 'Invalid credentials'});
         }
@@ -127,10 +128,47 @@ export const signIn:RequestHandler=async(req,res)=>{
   sameSite: 'lax', 
   secure: false 
 });
-return res.status(200).json({message: "Successfully signed in",data: {email, token}});
+console.log('userId', user.id);
+return res.status(200).json({message: "Successfully signed in",
+    data: {email, token, userId: user.id}});
 });
     } catch (error) {
         console.log("error while signing in",error);
         return res.status(500).json({message: "error while signin in"});
+    }
+}
+
+export const me: RequestHandler = async (req, res) => {
+    try {
+        const token = req.cookies.authToken;
+        if (!token) {
+            return res.status(401).json({message: "No token found"});
+        }
+        
+        jwt.verify(token, SECRET!, async (err:any, decoded: any) => {
+            if (err) {
+                console.log('JWT verify error', err);
+                return res.status(401).json({message: "Invalid token"});
+            }
+            
+            try {
+                const user = await prisma.user.findUnique({
+                    where: { email: decoded.data },
+                    select: { id: true, email: true, createdAt: true, updatedAt: true }
+                });
+                
+                if (!user) {
+                    return res.status(404).json({message: "User not found"});
+                }
+                
+                return res.status(200).json({user});
+            } catch (error) {
+                console.log("Error fetching user", error);
+                return res.status(500).json({message: "Error fetching user"});
+            }
+        });
+    } catch (error) {
+        console.log("Error in /me endpoint", error);
+        return res.status(500).json({message: "Internal server error"});
     }
 }

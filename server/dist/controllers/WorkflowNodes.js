@@ -1,7 +1,8 @@
 import prisma from '../db/prisma.js';
 export const createNode = async (req, res) => {
     try {
-        const { workflowId, type, parameters, positionX, positionY, } = req.body;
+        const { workflowId, type, parameters, positionX, positionY, trigger, credentialId } = req.body;
+        console.log('body', req.body);
         if (!workflowId || !type || positionX === undefined || positionY === undefined) {
             return res.status(500).json({ message: 'Provide Valid Inputs' });
         }
@@ -9,14 +10,18 @@ export const createNode = async (req, res) => {
         if (!workflow) {
             return res.status(500).json({ message: 'No valid workflow found with these credentials' });
         }
+        //@ts-ignore
+        const nodeData = {
+            workflowId,
+            type,
+            parameters,
+            positionX,
+            positionY,
+            credentialId,
+            trigger
+        };
         const node = await prisma.workflowNode.create({
-            data: {
-                workflowId,
-                type,
-                parameters,
-                positionX,
-                positionY
-            }
+            data: nodeData
         });
         res.status(200).json({ message: 'Node created successfully', node });
     }
@@ -47,7 +52,7 @@ export const getNodes = async (req, res) => {
 export const updateNode = async (req, res) => {
     try {
         const nodeId = req.params.id;
-        const { type, parameters, positionX, positionY } = req.body;
+        const { type, parameters, positionX, positionY, trigger, credentialId } = req.body;
         if (!nodeId || !type || positionX === undefined || positionY === undefined) {
             return res.status(500).json({ message: 'Provide Valid Inputs' });
         }
@@ -55,9 +60,18 @@ export const updateNode = async (req, res) => {
         if (!node) {
             return res.status(500).json({ message: 'No valid node found with these credentials' });
         }
+        const updatedNodeData = {
+            workflowId: node.workflowId,
+            type,
+            parameters,
+            positionX,
+            positionY,
+            credentialId,
+            trigger
+        };
         const updatedNode = await prisma.workflowNode.update({
             where: { id: nodeId },
-            data: { type, parameters, positionX, positionY }
+            data: updatedNodeData
         });
         res.status(200).json({ message: 'Node updated successfully', node: updatedNode });
     }

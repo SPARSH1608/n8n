@@ -1,7 +1,7 @@
 import prisma from "../db/prisma.js";
 export const createWorkflow = async (req, res) => {
     try {
-        const { userId, name } = req.body;
+        const { userId, name, isActive, trigger } = req.body;
         if (!userId || !name) {
             return res.status(500).json({ message: 'Provide Valid Inputs' });
         }
@@ -9,11 +9,14 @@ export const createWorkflow = async (req, res) => {
         if (!user) {
             return res.status(500).json({ message: 'No valid user found with these credentials' });
         }
+        const data = {
+            userId,
+            name,
+            isActive,
+            trigger
+        };
         const workflow = await prisma.workflow.create({
-            data: {
-                userId,
-                name
-            }
+            data: data
         });
         res.status(200).json({ message: 'Workflow created successfully', workflow });
     }
@@ -43,7 +46,7 @@ export const getWorkflows = async (req, res) => {
 export const updateWorkflow = async (req, res) => {
     try {
         const workflowId = req.params.id;
-        const { name, isActive } = req.body;
+        const { name, isActive, trigger } = req.body;
         if (!workflowId || name === undefined || isActive === undefined) {
             return res.status(500).json({ message: 'Provide Valid Inputs' });
         }
@@ -51,9 +54,14 @@ export const updateWorkflow = async (req, res) => {
         if (!workflow) {
             return res.status(500).json({ message: 'No valid workflow found with these credentials' });
         }
+        const updatedData = {
+            name,
+            isActive,
+            trigger
+        };
         const updatedWorkflow = await prisma.workflow.update({
             where: { id: workflowId },
-            data: { name, isActive }
+            data: updatedData
         });
         res.status(200).json({ message: 'Workflow updated successfully', updatedWorkflow });
     }

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import CircularImageGallery from "@/components/SphereImageGallery";
-import AuthModal from "@/components/AuthModal";
+import { useState } from "react";
+import AuthModal from "../components/AuthModal";
 
 const LandingPage = () => {
   const [showAuthModal, setShowAuthModal] = useState<null | "signup" | "signin">(null);

@@ -6,6 +6,7 @@ import workflowsRouter from './routes/WorkflowRoute.js'
 import workflowNodesRouter from './routes/WorkflowNodeRoute.js'
 import LinksRouter from './routes/LinksRoute.js'
 import TriggerConfigRouter from './routes/TriggerConfigRoute.js'
+import ExecutionRouter from './routes/ExecutionRoute.js'
 import cors from 'cors';
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -20,6 +21,7 @@ app.use('/api/v1/workflows',workflowsRouter)
 app.use('/api/v1/nodes',workflowNodesRouter)
 app.use('/api/v1/links',LinksRouter)
 app.use('/api/v1/trigger-config',TriggerConfigRouter)
+app.use('/api/v1/execution',ExecutionRouter)
 app.listen(3000,()=>{
     console.log('Server is running on port 3000');
 })

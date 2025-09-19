@@ -36,33 +36,33 @@ model Credential {
 }
 
 model Workflow {
-  id                 String                @id @default(uuid())
-  user               User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String             @id @default(uuid())
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             String
   name               String
-  isActive           Boolean               @default(false)
-  createdAt          DateTime              @default(now())
-  updatedAt          DateTime              @updatedAt
+  isActive           Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
   nodes              WorkflowNode[]
   nodeLinks          WorkflowNodeLink[]
-  triggerConfig      TriggerConfiguration?
+  trigger            String             @default("manual") // manual, scheduled, webhook
   executionHistories ExecutionHistory[]
 }
 
 model WorkflowNode {
-  id         String   @id @default(uuid())
-  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  workflowId String
-  type       String
-  parameters Json
-  positionX  Int?
-  positionY  Int?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  outgoingLinks        WorkflowNodeLink[]    @relation("OutgoingLinks")
-  incomingLinks        WorkflowNodeLink[]    @relation("IncomingLinks")
-  triggerConfiguration TriggerConfiguration?
+  id            String             @id @default(uuid())
+  workflow      Workflow           @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  workflowId    String
+  type          String // action
+  parameters    Json
+  positionX     Int?
+  positionY     Int?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  credentialId  String?
+  outgoingLinks WorkflowNodeLink[] @relation("OutgoingLinks")
+  incomingLinks WorkflowNodeLink[] @relation("IncomingLinks")
+  trigger       String             @default("none") // none, trigger, action
 }
 
 model WorkflowNodeLink {
@@ -79,18 +79,6 @@ model WorkflowNodeLink {
   updatedAt DateTime     @updatedAt
 }
 
-model TriggerConfiguration {
-  id           String        @id @default(uuid())
-  workflow     Workflow?     @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  workflowId   String?       @unique
-  WorkflowNode WorkflowNode? @relation(fields: [nodeId], references: [id], onDelete: Cascade)
-  nodeId       String?       @unique
-  type         String
-  config       Json
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-}
-
 model ExecutionHistory {
   id         String    @id @default(uuid())
   workflow   Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
@@ -99,4 +87,17 @@ model ExecutionHistory {
   startedAt  DateTime  @default(now())
   finishedAt DateTime?
   log        Json
+
+  nodeExecutionHistories NodeExecutionHistory[]
+}
+
+model NodeExecutionHistory {
+  id                  String           @id @default(uuid())
+  executionHistory    ExecutionHistory @relation(fields: [workflowExecutionId], references: [id])
+  workflowExecutionId String
+  nodeId              String
+  input               Json
+  output              Json
+  status              String
+  timestamp           DateTime         @default(now())
 }

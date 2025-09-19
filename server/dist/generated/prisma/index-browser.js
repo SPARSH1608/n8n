@@ -144,7 +144,8 @@ exports.Prisma.WorkflowScalarFieldEnum = {
   name: 'name',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  trigger: 'trigger'
 };
 
 exports.Prisma.WorkflowNodeScalarFieldEnum = {
@@ -155,7 +156,9 @@ exports.Prisma.WorkflowNodeScalarFieldEnum = {
   positionX: 'positionX',
   positionY: 'positionY',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  credentialId: 'credentialId',
+  trigger: 'trigger'
 };
 
 exports.Prisma.WorkflowNodeLinkScalarFieldEnum = {
@@ -167,16 +170,6 @@ exports.Prisma.WorkflowNodeLinkScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TriggerConfigurationScalarFieldEnum = {
-  id: 'id',
-  workflowId: 'workflowId',
-  nodeId: 'nodeId',
-  type: 'type',
-  config: 'config',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ExecutionHistoryScalarFieldEnum = {
   id: 'id',
   workflowId: 'workflowId',
@@ -184,6 +177,16 @@ exports.Prisma.ExecutionHistoryScalarFieldEnum = {
   startedAt: 'startedAt',
   finishedAt: 'finishedAt',
   log: 'log'
+};
+
+exports.Prisma.NodeExecutionHistoryScalarFieldEnum = {
+  id: 'id',
+  workflowExecutionId: 'workflowExecutionId',
+  nodeId: 'nodeId',
+  input: 'input',
+  output: 'output',
+  status: 'status',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.SortOrder = {
@@ -218,8 +221,8 @@ exports.Prisma.ModelName = {
   Workflow: 'Workflow',
   WorkflowNode: 'WorkflowNode',
   WorkflowNodeLink: 'WorkflowNodeLink',
-  TriggerConfiguration: 'TriggerConfiguration',
-  ExecutionHistory: 'ExecutionHistory'
+  ExecutionHistory: 'ExecutionHistory',
+  NodeExecutionHistory: 'NodeExecutionHistory'
 };
 
 /**

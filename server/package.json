@@ -4,12 +4,15 @@
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "generate-password": "^1.7.1",
+    "imapflow": "^1.0.196",
     "jsonwebtoken": "^9.0.2",
-    "resend": "^6.0.3"
+    "mailparser": "^3.7.4",
+    "resend": "^6.1.0"
   },
   "type": "module",
   "name": "server",
@@ -25,6 +28,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.19",
+    "@types/mailparser": "^3.4.6",
     "@types/node": "^24.3.1",
     "prisma": "^6.16.1",
     "ts-node": "^10.9.2",
